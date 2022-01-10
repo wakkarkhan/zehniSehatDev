@@ -1,0 +1,13 @@
+[
+    {   
+        "id": 1,
+        "name": "Nicolas Flowers ",
+        "patient_id": "#PT0016",
+        "appt_date": "11 Nov 2019",
+        "appt_time": "10.00 AM",
+        "image": "patient.jpg",
+        "purpose": "General",
+        "type": "New Patient",
+        "paid_amount": "$150"
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {   
+        "id": 1,
+        "name" : "Nicolas Flowers",
+        "patient_id": "P0016",
+        "image": "patient.jpg",
+        "location": "Alabama, USA",
+        "phone_no": "+1 952 001 8563",
+        "age": "38 Years, Male",
+        "blood_group": "AB+"
+    }
+]

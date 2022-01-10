@@ -1,0 +1,26 @@
+[
+    {   
+        "id": 1,
+        "SNO": "#SP001",
+        "image": "specialities-01.png",
+        "speciality": "Emotions "
+    },
+    {
+        "id": 2,
+        "SNO": "#SP002",
+        "image": "specialities-02.png",
+        "speciality": "Cognitive"
+    },
+    {
+        "id": 3,
+        "SNO": "#SP003",
+        "image": "specialities-03.png",
+        "speciality": "Psycho Spiritual Stress "
+    },
+    {
+        "id": 4,
+        "SNO": "#SP004",
+        "image": "specialities-04.png",
+        "speciality": "Behavioral"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Dr Jerman Delong",
+        "specialist": "Chief Pediatrician",
+        "image": "doctor-thumb-02.jpg",
+        "rating": 66,
+        "location": "Florida, USA",
+        "availableOn": "Available on Mon, 22 Sep",
+        "fees": "$150 - $220"
+    },
+    {
+        "id": 2,
+        "name": "Dr Neel Akins",
+        "specialist": "Chief Pediatrician",
+        "image": "doctor-thumb-05.jpg",
+        "rating": 17,
+        "location": "Newyork, USA",
+        "availableOn": "Available on Fri, 22 Mar",
+        "fees": "$50 - $300"
+    },
+    {
+        "id": 3,
+        "name": "Dr McKenna Slone",
+        "specialist": "Chief Pediatrician",
+        "image": "doctor-thumb-08.jpg",
+        "rating": 27,
+        "location": "Georgia, USA",
+        "availableOn": "Available on Fri, 22 Mar",
+        "fees": "$100 - $400"
+    },
+    {
+        "id": 4,
+        "name": "Dr Lydah Sutton",
+        "specialist": "Chief Pediatrician",
+        "image": "doctor-thumb-01.jpg",
+        "rating": 4,
+        "location": "Louisiana, USA",
+        "availableOn": "Available on Fri, 22 Mar",
+        "fees": "$150 - $250"
+    }
+]

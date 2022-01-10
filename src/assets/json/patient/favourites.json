@@ -1,0 +1,12 @@
+[   
+    {
+        "id": 1,
+        "name": "Dr. John Moffett",
+        "specialist": "M.D. (Psychiatry)",
+        "image": "doctor-01.jpg",
+        "rating": 17,
+        "location": "Florida, USA",
+        "availableOn": "Available on Fri, 22 Mar",
+        "fees": "$300 - $1000"
+    }
+]

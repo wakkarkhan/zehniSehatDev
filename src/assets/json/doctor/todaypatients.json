@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "name": "Mark John ",
+        "patient_id": "#PT0006",
+        "appt_date": "14 Nov 2019",
+        "appt_time": "6.00 PM",
+        "image": "patient6.jpg",
+        "purpose": "Fever",
+        "type": "Old Patient",
+        "paid_amount": "$300"
+    }
+]
