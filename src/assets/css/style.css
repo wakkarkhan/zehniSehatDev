@@ -215,7 +215,7 @@ input[type=password] {
 }
 .content {
 	min-height: 200px;
-	padding: 150px 0 0 !important;
+	padding: 150px 0 0;
 }
 
 /*-----------------
@@ -2250,7 +2250,7 @@ html.menu-opened body {
 -----------------------*/
 
 .home-banner { 
-	background-image: url('../img/home-bg.png');
+	background-image: url('../img/home-bg.jpeg');
     min-height: 450px;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -2368,7 +2368,7 @@ html.menu-opened body {
     font-size: 16px;
 }
 .our-solutions {
-	background-image: url('../img/our-provide.png');
+	background-image: url('../img/our-provide.jpeg');
 	padding: 60px 0 45px;
 }
 .our-solutions .section-title {
@@ -5485,13 +5485,13 @@ html.menu-opened body {
 	33. Voice call
 -----------------------*/
 
-.modal-open .main-wrapper {
+/* .modal-open .main-wrapper {
     -webkit-filter: blur(1px);
     -moz-filter: blur(1px);
     -o-filter: blur(1px);
     -ms-filter: blur(1px);
     filter: blur(1px);
-}
+} */
 .call-main-row {
 	bottom: 0;
 	left: 0;

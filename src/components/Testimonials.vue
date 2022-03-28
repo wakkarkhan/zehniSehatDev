@@ -76,7 +76,7 @@
 
 <script>
 import HomeService from '@/api-services/home.service';
-const images = require.context('@/assets/img/testimonial', false, /\.png$|\.jpg$/)
+const images = require.context('@/assets/img/blog', false, /\.png$|\.jpg$/)
 import testimonials from '../assets/json/testimonials'
 export default {
     data() {
@@ -146,7 +146,7 @@ export default {
             });
 		},
 		 loadImg(imgPath, value) {
-			return images('./testi-01.jpg')
+			return images('./blog-01_old.jpg')
         },
         
     },

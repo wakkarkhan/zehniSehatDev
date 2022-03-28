@@ -8,7 +8,7 @@
 						<div v-for="singleArticle in this.latestCategoriesAllArticlesData" :key="singleArticle.id" class="col-sm-6 col-md-4 col-lg-3">
 							<div class="card">
 								<h5>
-									<router-link :to="'/doctor/blog-details/'+singleArticle.title">{{singleArticle.title}}</router-link>
+									<router-link class="color-yellow" :to="'/doctor/blog-details/'+singleArticle.title">{{singleArticle.title}}</router-link>
 								</h5>
 								<p>{{singleArticle.short_description}}</p>
 								<router-link class="read-more-text" :to="'/doctor/blog-details/'+singleArticle.title">Readmore</router-link>
@@ -49,3 +49,8 @@ export default {
 	}
 }
 </script>
+<style>
+.color-yellow{
+	color: #E1AD01 !important;
+}
+</style>

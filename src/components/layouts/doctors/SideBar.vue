@@ -8,10 +8,10 @@
                     <img src="@/assets/img/doctors/doctor-02.jpg" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    <h3>Mr. Therapist</h3>
+                    <h3>{{therapist_data.full_name}}</h3>
                     
                     <div class="patient-details">
-                        <h5 class="mb-0">D.N.B. (Psychiatry)
+                        <h5 class="mb-0">{{therapist_data.specialization}}
 </h5>
                     </div>
                 </div>
@@ -26,12 +26,12 @@
                             <span>Dashboard</span>
                         </router-link>
                     </li>
-                    <li :class="currentPath == 'doctor-appointments' ? 'active' : 'notactive'">
+                    <!-- <li :class="currentPath == 'doctor-appointments' ? 'active' : 'notactive'">
                         <router-link to="/doctor/appointments">
                             <i class="fas fa-calendar-check"></i>
                             <span>Appointments</span>
                         </router-link>
-                    </li>
+                    </li> -->
                     <li :class="currentPath == 'my-patients' ? 'active' : 'notactive'">
                         <router-link to="/doctor/patients">
                             <i class="fas fa-user-injured"></i>
@@ -44,12 +44,12 @@
                             <span>Schedule Timings</span>
                         </router-link>
                     </li>
-                    <li :class="currentPath == 'invoices' ? 'active' : 'notactive'">
+                    <!-- <li :class="currentPath == 'invoices' ? 'active' : 'notactive'">
                         <router-link to="/doctor/invoices">
                             <i class="fas fa-file-invoice"></i>
                             <span>Invoices</span>
                         </router-link>
-                    </li>
+                    </li> -->
                     <li :class="currentPath == 'doctor-reviews' ? 'active' : 'notactive'">
                         <router-link to="/doctor/reviews">
                             <i class="fas fa-star"></i>
@@ -69,23 +69,23 @@
                             <span>Profile Settings</span>
                         </router-link>
                     </li>
-                    <li :class="currentPath == 'social-media' ? 'active' : 'notactive'">
+                    <!-- <li :class="currentPath == 'social-media' ? 'active' : 'notactive'">
                         <router-link to="/doctor/social-media">
                             <i class="fas fa-share-alt"></i>
                             <span>Social Media</span>
                         </router-link>
-                    </li>
-                    <li :class="currentPath == 'change-password' ? 'active' : 'notactive'">
+                    </li> -->
+                    <li :class="currentPath == 'doctor-change-password' ? 'active' : 'notactive'">
                         <router-link to="/doctor/change-password">
                             <i class="fas fa-lock"></i>
                             <span>Change Password</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/index">
+                        <a class="cursor" @click="logoutTherapist">
                             <i class="fas fa-sign-out-alt"></i>
                             <span>Logout</span>
-                        </router-link>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -95,7 +95,45 @@
 </template>
 
 <script>
+import TherapistService from '@/api-services/therapists.service';
+
 export default {
+    data(){
+        return{
+            therapist_data:{}
+        }
+    },
+    methods:{
+        logoutTherapist(){
+			this.$localStorage.remove('token');
+			this.$localStorage.remove('user');
+			this.$localStorage.remove('role');
+			this.$router.push('/login');
+		},
+        getTherapistDashboardData(){
+            let token = window.localStorage.getItem('token');
+            TherapistService.therapistDashboardService(token).then((response) => {
+                if(response.status==200){
+                    this.therapist_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+        }
+    },
+     created(){
+        
+        if(window.localStorage.getItem('role') =='therapist') {
+            this.getTherapistDashboardData();
+        }
+        else{
+            this.$router.push('/login');
+        }
+    },
     computed:{
         currentPath() {
             return this.$route.name;

@@ -17,7 +17,8 @@
                             </ul>
                         </div>
                         <div class="col-sm-5 col">
-								<a href="#Add_Specialities_details" data-toggle="modal" class="btn btn-primary float-right mt-2">Add</a>
+								<!-- <a href="/admin/addNewProfile" class="btn btn-primary float-right mt-2"></a> -->
+                                <router-link to="/admin/addNewProfile" class="btn btn-primary float-right mt-2">Add New</router-link>
 						</div>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                                                 <td>
                                                     <h2 class="table-avatar">
                                                         <router-link to="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="loadImg()" alt="User Image"></router-link>
-                                                        <router-link to="/admin/profile">{{item.full_name}}</router-link>
+                                                        <router-link :to="'/admin/singleProfile/'+item.id">{{item.full_name}}</router-link>
                                                     </h2>
                                                 </td>
                                                 <td>{{item.speciality}}</td>

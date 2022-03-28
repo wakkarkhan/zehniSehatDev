@@ -17,7 +17,7 @@ import Messages from '@/components/doctor/Messages'
 import ProfileSettings from '@/components/doctor/ProfileSettings'
 import PatientProfile from '@/components/doctor/PatientProfile'
 import SocialMedia from '@/components/doctor/SocialMedia'
-import ChangePassword from '@/components/ChangePassword'
+import DoctorChangePassword from '@/components/doctor/ChangePassword'
 import DoctorRegister from '@/components/doctor/Register'
 import DoctorProfile from '@/components/doctor/Profile'
 import BlogDetails from '@/components/doctor/BlogDetails'
@@ -42,6 +42,7 @@ import Checkout from '@/components/patient/Checkout'
 import Favourites from '@/components/patient/Favourites'
 import Chat from '@/components/patient/Chat'
 import PatientProfileSettings from '@/components/patient/Profile'
+import PatientChangePassword from '@/components/patient/ChangePassword'
 import Dependent from '@/components/patient/Dependent'
 import AddDependent from '@/components/patient/AddDependent'
 import VisitType from '@/components/patient/VisitType'
@@ -69,6 +70,8 @@ import Transaction from '@/components/admin/transactionslist.vue'
 import Settingslist from '@/components/admin/settings.vue'
 import Invoicereportlist from '@/components/admin/invoicereport.vue'
 import Profilelist from '@/components/admin/profile.vue'
+import SingleProfile from '@/components/admin/singleProfile.vue'
+import AddProfile from '@/components/admin/addprofile.vue'
 import loginlist from '@/components/admin/login.vue'
 import registerlist from '@/components/admin/register.vue'
 import Forgotlist from '@/components/admin/forgotpassword.vue'
@@ -95,6 +98,8 @@ import InvoiceView from '@/components/InvoiceView'
 import Blank from '@/components/Blank'
 import Categories from '@/components/Categories'
 import Assesments from '@/components/Assesments'
+import AboutUs from '@/components/About'
+import ContactUs from '@/components/Contact'
 import Login from '@/components/Login'
 import PatientRegister from '@/components/patient/Register'
 import ForgotPassword from '@/components/ForgotPassword'
@@ -104,8 +109,8 @@ import PrivacyPolicy from '@/components/PrivacyPolicy'
 
 Vue.use(Router)
 const router = new Router({
-  //mode: 'hash',
-  mode: 'history',
+  mode: 'hash',
+  //mode: 'history',
   //base: 'template-psychiatrist',
   routes: [
     {
@@ -117,6 +122,16 @@ const router = new Router({
       path: '/assesments',
       name: 'assesments',
       component: Assesments
+    },
+    {
+      path: '/about-us',
+      name: 'about-us',
+      component: AboutUs
+    },
+    {
+      path: '/contact-us',
+      name: 'contact-us',
+      component: ContactUs
     },
     // {
     //   path: '/',
@@ -190,8 +205,8 @@ const router = new Router({
     },
     {
       path: '/doctor/change-password',
-      name: 'change-password',
-      component: ChangePassword
+      name: 'doctor-change-password',
+      component: DoctorChangePassword
     },
     {
       path: '/doctor/register',
@@ -199,7 +214,7 @@ const router = new Router({
       component: DoctorRegister
     },
     {
-      path: '/doctor/profile',
+      path: '/doctor/profile/:doctor_id',
       name: 'doctor-profile',
       component: DoctorProfile
     },
@@ -271,17 +286,17 @@ const router = new Router({
       component: PatientDashboard
     },
     {
-      path: '/patient/booking',
+      path: '/patient/booking/:doctor_id/:doctor_name',
       name: 'booking',
       component: Booking
     },
     {
-      path: '/patient/booking-success',
+      path: '/patient/booking-success/:doctor_name',
       name: 'booking-success',
       component: BookingSuccess
     },
     {
-      path: '/patient/checkout',
+      path: '/patient/checkout/:doctor_id/:doctor_name',
       name: 'checkout',
       component: Checkout
     },
@@ -301,10 +316,15 @@ const router = new Router({
       component: PatientProfileSettings
     },
     {
-      path: '/patient/change-password',
-      name: 'patient-change-password',
-      component: ChangePassword
+      path: '/patient/changePassword',
+      name: 'patient-changePassword',
+      component: PatientChangePassword
     },
+    // {
+    //   path: '/patient/change-password',
+    //   name: 'patient-change-password',
+    //   component: ChangePassword
+    // },
     {
       path: '/patient/dependent',
       name: 'dependent',
@@ -424,6 +444,16 @@ const router = new Router({
       path: '/admin/profile',
       name: 'profile',
       component: Profilelist
+    },
+    {
+      path: '/admin/singleProfile/:therapist_id',
+      name: 'singleProfile',
+      component: SingleProfile
+    },
+    {
+      path: '/admin/addNewProfile',
+      name: 'profile',
+      component: AddProfile
     },
     {
       path: '/admin/login',

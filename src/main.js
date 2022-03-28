@@ -102,11 +102,19 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 
 //if(window.location.pathname.includes("template-psychiatrist/admin")) {
-  if(window.location.pathname.includes("admin")) {
-  require('./assets/css/adminstyle.css');
-}else {
-  require('./assets/css/style.css');
-}
+  //if(window.location.pathname.includes("/admin")) {
+    if(window.location.href.indexOf("admin") > -1){
+  //alert('admin');
+    require('./assets/css/adminstyle.css');
+    }else {
+     // alert('not admin');
+      //require('./assets/css/adminstyle.css');
+      require('./assets/css/style.css');
+    }
+    import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+    import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+     
+    Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 import VueLocalStorage from 'vue-localstorage'
  
 Vue.use(VueLocalStorage)
@@ -115,6 +123,9 @@ Vue.use(VueLocalStorage, {
   name: 'ls',
   bind: true //created computed members from your variable declarations
 })
+
+
+import Datepicker from 'vuejs-datepicker';
 import './assets/plugins/fontawesome/css/fontawesome.min.css'
 import './assets/plugins/fontawesome/css/all.min.css'
 import Slick from 'vue-slick'

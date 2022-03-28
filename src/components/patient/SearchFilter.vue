@@ -6,11 +6,11 @@
 					<h4 class="card-title mb-0">Search Filter</h4>
 				</div>
 				<div class="card-body">
-				<div class="filter-widget">
+				<!-- <div class="filter-widget">
 					<div class="cal-icon">
 						<input type="text" class="form-control datetimepicker" placeholder="Select Date">
 					</div>			
-				</div>
+				</div> -->
 				<div class="filter-widget">
 					<h4>Gender</h4>
 					<div>

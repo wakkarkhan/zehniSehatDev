@@ -18,12 +18,14 @@
     "popper.js": "^1.16.1",
     "pretty-checkbox-vue": "^1.1.9",
     "vue": "^2.5.2",
+    "vue-ctk-date-time-picker": "^2.5.0",
     "vue-custom-scrollbar": "^1.4.0",
     "vue-feather-icons": "^5.1.0",
     "vue-localstorage": "^0.6.2",
     "vue-morris": "^1.1.0",
     "vue-router": "^3.0.1",
-    "vue-slick": "^1.1.15"
+    "vue-slick": "^1.1.15",
+    "vuejs-datepicker": "^1.6.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

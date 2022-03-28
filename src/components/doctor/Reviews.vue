@@ -18,75 +18,58 @@
 								<ul class="comments-list">
 								
 									<!-- Comment List -->
-									<li>
+									<li v-for="item in this.all_reviews" :key="item.id">
 										<div class="comment">
 											<img class="avatar rounded-circle" alt="User Image" src="@/assets/img/patients/patient.jpg">
 											<div class="comment-body">
 												<div class="meta-data">
-													<span class="comment-author">Nicolas Flowers</span>
+													<span class="comment-author">{{item.full_name}}</span>
 													<span class="comment-date">Reviewed 2 Days ago</span>
-													<div class="review-count rating">
+													<div class="review-count rating" v-if="item.rating==1">
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+													</div>
+													<div class="review-count rating" v-if="item.rating==2">
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+													</div>
+													<div class="review-count rating" v-if="item.rating==3">
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star "></i>
+														<i class="fas fa-star "></i>
+													</div>
+													<div class="review-count rating" v-if="item.rating==4">
 														<i class="fas fa-star filled"></i>
 														<i class="fas fa-star filled"></i>
 														<i class="fas fa-star filled"></i>
 														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
+														<i class="fas fa-star "></i>
+													</div>
+													<div class="review-count rating" v-if="item.rating==5">
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
+														<i class="fas fa-star filled"></i>
 													</div>
 												</div>
-												<p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+												<!-- <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p> -->
 												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
+													{{item.feedback}}
 												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-												   <p class="recommend-btn">
-													<span>Recommend?</span>
-													<a href="#" class="like-btn">
-														<i class="far fa-thumbs-up"></i> Yes
-													</a>
-													<a href="#" class="dislike-btn">
-														<i class="far fa-thumbs-down"></i> No
-													</a>
-												</p>
-												</div>
+												
 											</div>
 										</div>
 										
-										<!-- Comment Reply -->
-										<ul class="comments-reply">
 										
-											<!-- Comment Reply List -->
-											<li>
-												<div class="comment">
-													<img class="avatar rounded-circle" alt="User Image" src="@/assets/img/doctors/doctor-thumb-02.jpg">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author">Dr. Mary Nielson</span>
-															<span class="comment-date">Reviewed 3 Days ago</span>
-														</div>
-														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam.
-															Curabitur non nulla sit amet nisl tempus
-														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- /Comment Reply List -->
-											
-										</ul>
-										<!-- /Comment Reply -->
 										
 									</li>
 									<!-- /Comment List -->
@@ -107,15 +90,40 @@
 </template>
 
 <script>
+import TherapistService from '@/api-services/therapists.service';
+
 import patients from '../../assets/json/doctor/mypatients.json'
 const images = require.context('@/assets/img/patients', false, /\.png$|\.jpg$/)
 export default {
     data() {
         return {
-            patients: patients
+			patients: patients,
+			all_reviews:{}
         }
-    },
+	},
+	created() {
+    if(window.localStorage.getItem('token') !='' && window.localStorage.getItem('user') !='' && window.localStorage.getItem('role') =='therapist') {
+		this.getTherapistReviewsData();
+	}
+    else{ this.$router.push({ path: '/login'})}
+   
+	},
      methods:{
+		 getTherapistReviewsData(){
+			 let token = window.localStorage.getItem('token');
+            TherapistService.therapistReviewsService(token).then((response) => {
+                if(response.status==200){
+					
+                    this.all_reviews = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
         loadImg(imgPath) {
             return images('./' + imgPath)
         },

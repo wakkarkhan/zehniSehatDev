@@ -29,9 +29,9 @@
                                         <thead>
                                             <tr>
                                                 <th>Patient Name</th>
-                                                <th>Doctor Name</th>
+                                                <th>Therapist Name</th>
                                                 
-                                                <th>Description</th>
+                                                <th>Feedback</th>
                                                 <th>Date</th>
                                                 <th class="text-right">Actions</th>
                                             </tr>
@@ -41,21 +41,21 @@
                                                 <td>
                                                     <h2 class="table-avatar">
                                                         <router-link to="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="loadImg(item.image, 1)" alt="User Image"></router-link>
-                                                        <router-link to="/admin/profile">{{item.patientname}} </router-link>
+                                                        <router-link to="/admin/profile">{{item.patient_name}} </router-link>
                                                     </h2>
                                                 </td>
                                                 <td>
                                                     <h2 class="table-avatar">
                                                         <router-link to="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="loadImg(item.doctorimage, 2)" alt="User Image"></router-link>
-                                                        <router-link to="/admin/profile">{{item.doctorname}} </router-link>
+                                                        <router-link to="/admin/profile">{{item.therapist_name}} </router-link>
                                                     </h2>
                                                 </td>
                                                 
                                                 
                                                 <td>
-                                                    {{item.description}}
+                                                    {{item.feedback}}
                                                 </td>
-                                                    <td>{{item.date}} <br><small>{{item.time}}</small></td>
+                                                    <td>{{item.created_at}} <br><small>Time</small></td>
                                                 <td class="text-right">
                                                     <div class="actions">
                                                         <a class="btn btn-sm bg-danger-light" data-toggle="modal" href="#delete_modal">
@@ -96,24 +96,57 @@
     </div>
 </template>
 <script>
-    import reviews from '../../assets/json/admin/Reviews/reviews.json'
+import AdminService from '@/api-services/admin.service';
+
+    // import reviews from '../../assets/json/admin/Reviews/reviews.json'
     const images = require.context('@/assets/admin_img/patients', false, /\.png$|\.jpg$/)
     const doctorsimages = require.context('@/assets/admin_img/doctors', false, /\.png$|\.jpg$/)
     
     export default {
         data() {
 		return {
-			reviews: reviews
+			reviews: {}
 		}
-	},
+    },
+    created(){
+		 if(window.localStorage.getItem('role') =='admin') {
+			this.getAllReviews();
+        }
+        else{
+            this.$router.push('/admin/login');
+        }
+    },
+    methods:{
+		getAllReviews(){
+			let token = window.localStorage.getItem('token');
+            AdminService.getAllReviewsService(token).then((response) => {
+                if(response.status==200){
+                    this.reviews = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+        loadImg() {
+			// if(value == 2) {
+			// 	return images('./' + imgPath)
+			// } else {
+			 	return images('./'  + 'patient1.jpg')
+			// }
+        },
+    },
     mounted() {
          // Datatable
 
-		 if ($('.datatable').length > 0) {
-        $('.datatable').DataTable({
-          "bFilter": false,
-        });
-      }
+	// 	 if ($('.datatable').length > 0) {
+    //     $('.datatable').DataTable({
+    //       "bFilter": false,
+    //     });
+    //   }
         $(document).on('click', '#toggle_btn', function() {
 		if($('body').hasClass('mini-sidebar')) {
 			$('body').removeClass('mini-sidebar');
@@ -143,15 +176,6 @@
 		}
     });
 },
-methods:{
-        loadImg(imgPath, value) {
-            if(value == 1) {
-                return images('./' + imgPath)
-            } else {
-                return doctorsimages('./' + imgPath)
-            }
-            
-        },
-    }
+
     }
 </script>

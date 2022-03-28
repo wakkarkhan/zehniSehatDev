@@ -1,5 +1,5 @@
 <template>
-        <div class="main-wrapper">
+        <div class="main-wrapper admin-home">
         <header-admin></header-admin>
         <sidebar-admin></sidebar-admin>
         <!-- Page Wrapper -->
@@ -414,6 +414,9 @@ import AdminService from '@/api-services/admin.service';
     }
 </script>
 <style>
+.admin-home .content{
+    padding: 1.875rem 1.875rem 0 !important;
+}
     .fa-users {
         font-size: 20px;
     }

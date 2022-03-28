@@ -17,8 +17,15 @@
                         <li> 
                             <router-link to="/admin/specialities"><users-icon size="1.4x" class="custom-class"></users-icon> <span>Specialities</span></router-link>
                         </li>
-                        <li> 
+                        <!-- <li> 
                             <router-link to="/admin/doctorlist"><user-plus-icon size="1.4x" class="custom-class"></user-plus-icon> <span>Therapists</span></router-link>
+                        </li> -->
+                        <li class="submenu">
+                            <a href="#"><user-plus-icon size="1.4x" class="custom-class"></user-plus-icon> <span> Therapists</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><router-link to="/admin/doctorlist">All</router-link></li>
+                                <li><router-link to="/admin/addNewProfile">Add New</router-link></li>
+                            </ul>
                         </li>
                         <li> 
                             <router-link to="/admin/patientlist"><user-icon size="1.4x" class="custom-class"></user-icon>
@@ -27,9 +34,9 @@
                         <li> 
                             <router-link to="/admin/reviews"><star-icon size="1.4x" class="custom-class"></star-icon> <span>Reviews</span></router-link>
                         </li>
-                        <li> 
+                        <!-- <li> 
                             <router-link to="/admin/transactionslist"><bar-chart-2-icon size="1.4x" class="custom-class"></bar-chart-2-icon> <span>Transactions</span></router-link>
-                        </li>
+                        </li> -->
                         <!-- <li> 
                             <router-link to="/admin/settings"><settings-icon size="1.4x" class="custom-class"></settings-icon> <span>Settings</span></router-link>
                         </li> -->

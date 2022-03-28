@@ -7,8 +7,24 @@ const RESOURCE_LATEST_CATEGORIES_ALL_ARTICLES = '/getLatestEightArticles';
 const RESOURCE_LATEST_ARTICLES_SERVICE = '/getAllCategoriesArticles';
 const RESOURCE_USER_REVIEWS = '/getUserReviews';
 const RESOURCE_RANDOM_ARTICLES = '/getRandomArticles';
+const RESOURCE_BOOK_APPOINTMENT = '/bookAppointment';
+const RESOURCE_ALL_BLOG_ARTICLES = '/getBlogArticles';
+const RESOURCE_ALL_HOME_CATEGORIES = '/getAllHomeCategories';
 
 export default {
+
+  getHomeAllCategories(){
+    return Axios.get(RESOURCE_ALL_HOME_CATEGORIES);
+  },
+  getAllBlogArticles(){
+    return Axios.get(RESOURCE_ALL_BLOG_ARTICLES);
+  },
+  bookAppointment(bookingData) {
+    
+    return Axios.post(RESOURCE_BOOK_APPOINTMENT, bookingData
+    );
+
+  },
   getSingleLatestCategoryService() {
     return Axios.get(RESOURCE_SINGLE_LATEST_CATEGORY);
   },

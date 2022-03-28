@@ -8,13 +8,13 @@
 					<div class="row mt-5">
 						<div class="col-md-4" v-for="singleArticle in this.randomArticlesData" :key="singleArticle.id">
 							<div class="card">
-								<img src="@/assets/img/news-event-01.jpg" class="card-img-top" alt="News and Events">
+								<img src="@/assets/img/blog/blog-01_old.jpg" class="card-img-top" alt="News and Events">
 								<div class="card-body">
 								  <h6 class="card-title">{{singleArticle.category_title}}</h6>
 								  	<h4>
 									  <router-link :to="'/doctor/blog-details/'+singleArticle.article_title">{{singleArticle.article_title}}</router-link>
 									</h4>
-								  <p class="card-text">{{singleArticle.short_description}}</p>
+								  <p class="card-text">{{singleArticle.short_des}}</p>
 								  <h6>Posted By: Admin</h6>
 								  <router-link :to="'/doctor/blog-details/'+singleArticle.article_title" class="read-more-text">Readmore</router-link>
 								</div>

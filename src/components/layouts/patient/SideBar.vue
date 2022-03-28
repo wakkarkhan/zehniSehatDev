@@ -7,10 +7,10 @@
                         <img src="@/assets/img/patients/patient.jpg" alt="User Image">
                     </a>
                     <div class="profile-det-info">
-                        <h3>Patient</h3>
+                        <h3>{{patient_data.full_name}}</h3>
                         <div class="patient-details">
-                            <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-                            <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
+                            <h5>{{patient_data.email}}</h5>
+                            <h5 class="mb-0"><i class="fas fa-phone"></i> {{patient_data.phone_number}}</h5>
                         </div>
                     </div>
                 </div>
@@ -49,17 +49,17 @@
                                 <span>Profile Settings</span>
                             </router-link>
                         </li>
-                        <li :class="currentPath == 'patient-change-password' || currentPath == 'my-account' ? 'active' : 'notaactive'">
-                            <router-link to="/patient/change-password">
+                        <li :class="currentPath == 'patient-changePassword' ? 'active' : 'notaactive'">
+                            <router-link to="/patient/changePassword">
                                 <i class="fas fa-lock"></i>
                                 <span>Change Password</span>
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/">
+                            <a class="cursor" @click="logoutPatient">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
-                            </router-link>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -69,7 +69,45 @@
 </template>
 
 <script>
+import PatientService from '@/api-services/patient.service';
+
 export default {
+    data(){
+        return{
+            patient_data:{}
+        }
+    },
+    methods:{
+        logoutPatient(){
+			this.$localStorage.remove('token');
+			this.$localStorage.remove('user');
+			this.$localStorage.remove('role');
+			this.$router.push('/login');
+		},
+        getPatientDashboadData(){
+            let token = window.localStorage.getItem('token');
+            PatientService.patientDashboardService(token).then((response) => {
+                if(response.status==200){
+                    this.patient_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+        }
+    },
+    created(){
+        
+        if(window.localStorage.getItem('role') =='patient') {
+            this.getPatientDashboadData();
+        }
+        else{
+            this.$router.push('/login');
+        }
+    },
     computed:{
         currentPath() {
             return this.$route.name;
@@ -77,3 +115,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.cursor{
+    cursor: pointer;
+}
+</style>

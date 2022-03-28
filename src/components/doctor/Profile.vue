@@ -12,12 +12,12 @@
 							<div class="doctor-widget">
 								<div class="doc-info-left">
 									<div class="doctor-img">
-										<img src="@/assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
+										<img :src="loadImg()" class="img-fluid" alt="User Image">
 									</div>
 									<div class="doc-info-cont">
-										<h4 class="doc-name">Dr. Jerman Delong</h4>
-										<p class="doc-speciality">D.N.B. (Psychiatry)</p>
-										<p class="doc-department"><img src="@/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Medicine in Neuroradiology</p>
+										<h4 class="doc-name">{{therapist_login_data.full_name}}</h4>
+										<p class="doc-speciality">{{therapist_login_data.gender}}</p>
+										<p class="doc-department"><img src="@/assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">{{this.therapist_specialization[0].title}}</p>
 										<div class="rating">
 											<i class="fas fa-star filled"></i>
 											<i class="fas fa-star filled"></i>
@@ -27,46 +27,31 @@
 											<span class="d-inline-block average-rating">(35)</span>
 										</div>
 										<div class="clinic-details">
-											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA - <a href="javascript:void(0);">Get Directions</a></p>
-											<ul class="clinic-gallery">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{therapist_login_data.postal_adress}} - <a href="javascript:void(0);">Get Directions</a></p>
+											<!-- <ul class="clinic-gallery">
 												<li>
 													<a href="@/assets/img/features/feature-01.jpg" data-fancybox="gallery">
 														<img src="@/assets/img/features/feature-01.jpg" alt="Feature">
 													</a>
 												</li>
-												<li>
-													<a href="@/assets/img/features/feature-02.jpg" data-fancybox="gallery">
-														<img  src="@/assets/img/features/feature-02.jpg" alt="Feature Image">
-													</a>
-												</li>
-												<li>
-													<a href="@/assets/img/features/feature-03.jpg" data-fancybox="gallery">
-														<img src="@/assets/img/features/feature-03.jpg" alt="Feature">
-													</a>
-												</li>
-												<li>
-													<a href="@/assets/img/features/feature-04.jpg" data-fancybox="gallery">
-														<img src="@/assets/img/features/feature-04.jpg" alt="Feature">
-													</a>
-												</li>
-											</ul>
+											</ul> -->
 										</div>
-										<div class="clinic-services">
+										<!-- <div class="clinic-services">
 											<span>Surgery & Radiology</span>
 											<span>Social Psychology</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="doc-info-right">
-									<div class="clini-infos">
+									<!-- <div class="clini-infos">
 										<ul>
 											<li><i class="far fa-thumbs-up"></i> 99%</li>
 											<li><i class="far fa-comment"></i> 35 Feedback</li>
 											<li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
 											<li><i class="far fa-money-bill-alt"></i> $100 per hour </li>
 										</ul>
-									</div>
-									<div class="doctor-action">
+									</div> -->
+									<!-- <div class="doctor-action">
 										<a href="javascript:void(0)" class="btn btn-white fav-btn">
 											<i class="far fa-bookmark"></i>
 										</a>
@@ -79,9 +64,10 @@
 										<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
 											<i class="fas fa-video"></i>
 										</a>
-									</div>
+									</div> -->
 									<div class="clinic-booking">
-										<router-link class="apt-btn" to="/patient/booking">Book Appointment</router-link>
+										<!-- <router-link class="apt-btn" :to="'/patient/checkout/'+this.$route.params.doctor_id+'/'+this.therapist_login_data.full_name">Book Appointment</router-link> -->
+										<router-link class="apt-btn" :to="'/patient/booking/'+this.$route.params.doctor_id+'/'+this.therapist_login_data.full_name">Book Appointment</router-link>
 									</div>
 								</div>
 							</div>
@@ -122,8 +108,8 @@
 										
 											<!-- About Details -->
 											<div class="widget about-widget">
-												<h4 class="widget-title">About Me</h4>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+												<h4 class="widget-title ">About Me</h4>
+												<p>{{therapist_details.about_therapist}}</p>
 											</div>
 											<!-- /About Details -->
 										
@@ -132,27 +118,15 @@
 												<h4 class="widget-title">Education</h4>
 												<div class="experience-box">
 													<ul class="experience-list">
-														<li>
+														<li v-for="singleEducation in therapist_education_data" :key="singleEducation.id">
 															<div class="experience-user">
 																<div class="before-circle"></div>
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">American Psychiatrist Medical University</a>
-																	<div>BDS</div>
-																	<span class="time">1998 - 2003</span>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">American Psychiatrist Medical University</a>
-																	<div>MDS</div>
-																	<span class="time">2003 - 2005</span>
+																	<a href="#/" class="name">{{singleEducation.university_name}}</a>
+																	<div>{{singleEducation.degree_program}}</div>
+																	<span class="time">{{singleEducation.tenure}}</span>
 																</div>
 															</div>
 														</li>
@@ -166,114 +140,30 @@
 												<h4 class="widget-title">Work & Experience</h4>
 												<div class="experience-box">
 													<ul class="experience-list">
-														<li>
+														<li v-for="singleWork in therapist_work_data" :key="singleWork.id">
 															<div class="experience-user">
 																<div class="before-circle"></div>
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">Glowing Smiles Family Psychiatrist Clinic</a>
-																	<span class="time">2010 - Present (5 years)</span>
+																	<a href="#/" class="name">{{singleWork.organization_name}}</a>
+																	<span class="time">{{singleWork.tenure}}</span>
+																	<span class="time">{{singleWork.designation}}</span>
 																</div>
 															</div>
 														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Comfort Care Psychiatrist Clinic</a>
-																	<span class="time">2007 - 2010 (3 years)</span>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<a href="#/" class="name">Dream Smile Psychiatrist Practice</a>
-																	<span class="time">2005 - 2007 (2 years)</span>
-																</div>
-															</div>
-														</li>
+														
+														
 													</ul>
 												</div>
 											</div>
 											<!-- /Experience Details -->
-								
-											<!-- Awards Details -->
-											<div class="widget awards-widget">
-												<h4 class="widget-title">Awards</h4>
-												<div class="experience-box">
-													<ul class="experience-list">
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">July 2019</p>
-																	<h4 class="exp-title">Humanitarian Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">March 2011</p>
-																	<h4 class="exp-title">Certificate for International Volunteer Service</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-														<li>
-															<div class="experience-user">
-																<div class="before-circle"></div>
-															</div>
-															<div class="experience-content">
-																<div class="timeline-content">
-																	<p class="exp-year">May 2008</p>
-																	<h4 class="exp-title">The Psychiatrist Professional of The Year Award</h4>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<!-- /Awards Details -->
-											
-											<!-- Services List -->
-											<div class="service-list">
-												<h4>Services</h4>
-												<ul class="clearfix">
-													<li>Tooth cleaning </li>
-													<li>Root Canal Therapy</li>
-													<li>Implants</li>
-													<li>Composite Bonding</li>
-													<li>Fissure Sealants</li>
-													<li>Surgical Extractions</li>
-												</ul>
-											</div>
-											<!-- /Services List -->
 											
 											<!-- Specializations List -->
 											<div class="service-list">
 												<h4>Specializations</h4>
 												<ul class="clearfix">
-													<li>Children Care</li>
-													<li>Psychiatrist Care</li>	
-													<li>Oral and Maxillofacial Surgery </li>	
-													<li>Orthodontist</li>
-													<li>Periodontist</li>
-													<li>Prosthodontics</li>	
+													<li>{{this.therapist_specialization[0].title}}</li>
 												</ul>
 											</div>
 											<!-- /Specializations List -->
@@ -286,94 +176,17 @@
 								<!-- Locations Content -->
 								<div role="tabpanel" id="doc_locations" class="tab-pane fade">
 								
-									<!-- Location List -->
-									<div class="location-list">
-										<div class="row">
-										
-											<!-- Clinic Content -->
-											<div class="col-md-6">
-												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">Smile Cute Physical stress Center</a></h4>
-													<p class="doc-speciality">M.D. (Psychiatry)</p>
-													<div class="rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-														<span class="d-inline-block average-rating">(4)</span>
-													</div>
-													<div class="clinic-details mb-0">
-														<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br><a href="javascript:void(0);">Get Directions</a></h5>
-														<ul>
-															<li>
-																<a href="@/assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-01.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-02.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-03.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-04.jpg" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Content -->
-											
-											<!-- Clinic Timing -->
-											<div class="col-md-4">
-												<div class="clinic-timing">
-													<div>
-														<p class="timings-days">
-															<span> Mon - Sat </span>
-														</p>
-														<p class="timings-times">
-															<span>10:00 AM - 2:00 PM</span>
-															<span>4:00 PM - 9:00 PM</span>
-														</p>
-													</div>
-													<div>
-													<p class="timings-days">
-														<span>Sun</span>
-													</p>
-													<p class="timings-times">
-														<span>10:00 AM - 2:00 PM</span>
-													</p>
-													</div>
-												</div>
-											</div>
-											<!-- /Clinic Timing -->
-											
-											<div class="col-md-2">
-												<div class="consult-price">
-													$250
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- /Location List -->
+									
 									
 									<!-- Location List -->
 									<div class="location-list">
-										<div class="row">
+										<div class="row" v-for="singleLocation in therapist_locations_data" :key="singleLocation.id">
 										
 											<!-- Clinic Content -->
-											<div class="col-md-6">
+											<div class="col-md-12">
 												<div class="clinic-content">
-													<h4 class="clinic-name"><a href="#">The Family Psychiatry Clinic</a></h4>
-													<p class="doc-speciality">M.D. (Psychiatry)</p>
+													<h4 class="clinic-name"><a href="#">{{singleLocation.clinic_name}}</a></h4>
+													<p class="doc-speciality"></p>
 													<div class="rating">
 														<i class="fas fa-star filled"></i>
 														<i class="fas fa-star filled"></i>
@@ -383,29 +196,7 @@
 														<span class="d-inline-block average-rating">(4)</span>
 													</div>
 													<div class="clinic-details mb-0">
-														<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br><a href="javascript:void(0);">Get Directions</a></p>
-														<ul>
-															<li>
-																<a href="@/assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-01.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-02.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-03.jpg" alt="Feature Image">
-																</a>
-															</li>
-															<li>
-																<a href="@/assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-																	<img src="@/assets/img/features/feature-04.jpg" alt="Feature Image">
-																</a>
-															</li>
-														</ul>
+														<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i>{{singleLocation.address}} <br><a href="javascript:void(0);">Get Directions</a></p>
 													</div>
 
 												</div>
@@ -413,7 +204,7 @@
 											<!-- /Clinic Content -->
 											
 											<!-- Clinic Timing -->
-											<div class="col-md-4">
+											<!-- <div class="col-md-4">
 												<div class="clinic-timing">
 													<div>
 														<p class="timings-days">
@@ -434,14 +225,14 @@
 														</p>
 													</div>
 												</div>
-											</div>
+											</div> -->
 											<!-- /Clinic Timing -->
 											
-											<div class="col-md-2">
+											<!-- <div class="col-md-2">
 												<div class="consult-price">
 													$350
 												</div>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<!-- /Location List -->
@@ -456,99 +247,16 @@
 									<div class="widget review-listing">
 										<ul class="comments-list">
 										
-											<!-- Comment List -->
-											<li>
-												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="@/assets/img/patients/patient.jpg">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author">Nicolas Flowers</span>
-															<span class="comment-date">Reviewed 2 Days ago</span>
-															<div class="review-count rating">
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star filled"></i>
-																<i class="fas fa-star"></i>
-															</div>
-														</div>
-														<p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
-														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam, quis nostrud exercitation.
-															Curabitur non nulla sit amet nisl tempus
-														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-														   <p class="recommend-btn">
-															<span>Recommend?</span>
-															<a href="#" class="like-btn">
-																<i class="far fa-thumbs-up"></i> Yes
-															</a>
-															<a href="#" class="dislike-btn">
-																<i class="far fa-thumbs-down"></i> No
-															</a>
-														</p>
-														</div>
-													</div>
-												</div>
-												
-												<!-- Comment Reply -->
-												<ul class="comments-reply">
-													<li>
-														<div class="comment">
-															<img class="avatar avatar-sm rounded-circle" alt="User Image" src="@/assets/img/patients/patient1.jpg">
-															<div class="comment-body">
-																<div class="meta-data">
-																	<span class="comment-author">Julio Hart</span>
-																	<span class="comment-date">Reviewed 3 Days ago</span>
-																	<div class="review-count rating">
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star filled"></i>
-																		<i class="fas fa-star"></i>
-																	</div>
-																</div>
-																<p class="comment-content">
-																	Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-																	sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-																	Ut enim ad minim veniam.
-																	Curabitur non nulla sit amet nisl tempus
-																</p>
-																<div class="comment-reply">
-																	<a class="comment-btn" href="#">
-																		<i class="fas fa-reply"></i> Reply
-																	</a>
-																	<p class="recommend-btn">
-																		<span>Recommend?</span>
-																		<a href="#" class="like-btn">
-																			<i class="far fa-thumbs-up"></i> Yes
-																		</a>
-																		<a href="#" class="dislike-btn">
-																			<i class="far fa-thumbs-down"></i> No
-																		</a>
-																	</p>
-																</div>
-															</div>
-														</div>
-													</li>
-												</ul>
-												<!-- /Comment Reply -->
-												
-											</li>
-											<!-- /Comment List -->
+									
+											
 											
 											<!-- Comment List -->
 											<li>
-												<div class="comment">
-													<img class="avatar avatar-sm rounded-circle" alt="User Image" src="@/assets/img/patients/patient2.jpg">
+												<div style="width: 100% !important;display: unset;" class="comment" v-for="singleReview in therapist_reviews_data" :key="singleReview.id">
+													<!-- <img class="avatar avatar-sm rounded-circle" alt="User Image" src="@/assets/img/patients/patient2.jpg"> -->
 													<div class="comment-body">
 														<div class="meta-data">
-															<span class="comment-author">Kimberly Klingler</span>
+															<span class="comment-author">Unknown</span>
 															<span class="comment-date">Reviewed 4 Days ago</span>
 															<div class="review-count rating">
 																<i class="fas fa-star filled"></i>
@@ -559,25 +267,9 @@
 															</div>
 														</div>
 														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam, quis nostrud exercitation.
-															Curabitur non nulla sit amet nisl tempus
+															{{singleReview.feedback}}
 														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-															<p class="recommend-btn">
-																<span>Recommend?</span>
-																<a href="#" class="like-btn">
-																	<i class="far fa-thumbs-up"></i> Yes
-																</a>
-																<a href="#" class="dislike-btn">
-																	<i class="far fa-thumbs-down"></i> No
-																</a>
-															</p>
-														</div>
+														
 													</div>
 												</div>
 											</li>
@@ -586,74 +278,13 @@
 										</ul>
 										
 										<!-- Show All -->
-										<div class="all-feedback text-center">
-											<a href="#" class="btn btn-primary btn-sm">
-												Show all feedback <strong>(167)</strong>
-											</a>
-										</div>
+										
 										<!-- /Show All -->
 										
 									</div>
 									<!-- /Review Listing -->
 								
-									<!-- Write Review -->
-									<div class="write-review">
-										<h4>Write a review for <strong>Dr. Mary Nielson</strong></h4>
-										
-										<!-- Write Review Form -->
-										<form>
-											<div class="form-group">
-												<label>Review</label>
-												<div class="star-rating">
-													<input id="star-5" type="radio" name="rating" value="star-5">
-													<label for="star-5" title="5 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-4" type="radio" name="rating" value="star-4">
-													<label for="star-4" title="4 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-3" type="radio" name="rating" value="star-3">
-													<label for="star-3" title="3 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-2" type="radio" name="rating" value="star-2">
-													<label for="star-2" title="2 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-1" type="radio" name="rating" value="star-1">
-													<label for="star-1" title="1 star">
-														<i class="active fa fa-star"></i>
-													</label>
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Title of your review</label>
-												<input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
-											</div>
-											<div class="form-group">
-												<label>Your review</label>
-												<textarea id="review_desc" maxlength="100" class="form-control"></textarea>
-											  
-											  <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
-											</div>
-											<hr>
-											<div class="form-group">
-												<div class="terms-accept">
-													<div class="custom-checkbox">
-													   <input type="checkbox" id="terms_accept">
-													   <label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
-													</div>
-												</div>
-											</div>
-											<div class="submit-section">
-												<button type="submit" class="btn btn-primary submit-btn">Add Review</button>
-											</div>
-										</form>
-										<!-- /Write Review Form -->
-										
-									</div>
-									<!-- /Write Review -->
+								
 						
 								</div>
 								<!-- /Reviews Content -->
@@ -736,3 +367,57 @@
 			<!-- /Page Content -->
     </div>
 </template>
+<script>
+import TherapistService from '@/api-services/therapists.service';
+
+import appointments from '../../assets/json/doctor/appointments.json'
+const images = require.context('@/assets/img/patients', false, /\.jpg$/)
+const doctorImages = require.context('@/assets/img/doctors', false, /\.jpg$/)
+export default {
+    data() {
+        return {
+			appointments: appointments,
+			therapist_login_data:{},
+			therapist_details:{},
+			therapist_education_data:{},
+			therapist_work_data:{},
+			therapist_locations_data:{},
+			therapist_reviews_data:{},
+			therapist_specialization:{}
+        }
+	},
+	created(){
+		this.getSingleTherapistProfileData();
+	},
+	 methods:{
+		getSingleTherapistProfileData(){
+            //let token = window.localStorage.getItem('token');
+			let therapistID = this.$route.params.doctor_id;
+            TherapistService.getTherapistProfileService(therapistID).then((response) => {
+                if(response.status==200){
+                    this.therapist_login_data = response.data.data.login_info;
+                    this.therapist_details = response.data.data.therapist_details;
+                    this.therapist_education_data = response.data.data.therapist_education;
+                    this.therapist_work_data = response.data.data.therapist_work;
+                    this.therapist_locations_data = response.data.data.therapist_locations;
+                    this.therapist_reviews_data = response.data.data.therapist_reviews;
+                    this.therapist_specialization = response.data.data.therapist_specialization;
+                    // this.therapist_login_data.full_name = response.data.data.login_info.full_name;
+                    // this.therapist_login_data.email = response.data.data.login_info.email;
+                    // this.therapist_login_data.password = response.data.data.login_info.password;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+
+        },
+        loadImg(imgPath, value) {
+			 	return doctorImages('./doctor-11.jpg');
+        },
+    }
+}
+</script>

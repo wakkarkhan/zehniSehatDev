@@ -17,7 +17,7 @@
 								</ul>
 							</div>
 							<div class="col-sm-5 col">
-								<a href="#Add_Specialities_details" data-toggle="modal" class="btn btn-primary float-right mt-2">Add</a>
+								<a href="#Add_Specialities_details" data-toggle="modal" class="btn btn-primary float-right mt-2">Add New</a>
 							</div>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 												
 													<td class="text-right">
 														<div class="actions">
-															<a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
+															<a class="btn btn-sm bg-success-light" data-toggle="modal" @click.prevent="editSpeciality(item)" href="#edit_specialities_details">
 																<i class="fa fa-edit"></i> Edit
 															</a>
 															<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
@@ -83,18 +83,24 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form>
+							<form @submit="addNewSpeciality">
 								<div class="row form-row">
 									<div class="col-12 col-sm-6">
 										<div class="form-group">
-											<label>Specialities</label>
-											<input type="text" class="form-control">
+											<label>Speciality Name</label>
+											<input v-model="add_new_speciality" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-12 col-sm-6">
 										<div class="form-group">
 											<label>Image</label>
 											<input type="file"  class="form-control">
+										</div>
+									</div>
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label>Speciality Description</label>
+											<textarea v-model="add_new_speciality_description" type="text" class="form-control"></textarea>
 										</div>
 									</div>
 									
@@ -118,12 +124,12 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form>
+							<form @submit.prevent="changeSpeciality()">
 								<div class="row form-row">
 									<div class="col-12 col-sm-6">
 										<div class="form-group">
-											<label>Specialities</label>
-											<input type="text" class="form-control" value="Cardiology">
+											<label>Name</label>
+											<input type="text" v-model="name_for_speciality_to_edit" class="form-control" value="Cardiology">
 										</div>
 									</div>
 									<div class="col-12 col-sm-6">
@@ -168,11 +174,17 @@ import AdminService from '@/api-services/admin.service';
     export default {
         data() {
 		return {
-			specialities: {}
+			specialities: {},
+			id_for_speciality_to_edit:'',
+			name_for_speciality_to_edit:'',
+			add_new_speciality:'',
+			add_new_speciality_description:'',
+			all_speciality_data:[{}],
+			new_speciality_data:[{}],
 		}
 	},
 	created(){
-		 if(window.localStorage.getItem('role') =='admin') {
+		if(window.localStorage.getItem('role') =='admin') {
 			this.getAllSpecialities();
         }
         else{
@@ -180,6 +192,65 @@ import AdminService from '@/api-services/admin.service';
         }
 	},
 	methods:{
+		addNewSpeciality(){
+			let token = window.localStorage.getItem('token');
+			//this.new_speciality_data[0]['speciality_name'] = this.add_new_speciality;
+            AdminService.AddNewSpecialityService(token, this.add_new_speciality, this.add_new_speciality_description).then((response) => {
+                if(response.status==200){
+					if(response.data.status){
+
+						//alert('true')
+						location.reload();
+                        //this.$router.push('/admin/specialities');
+                    }
+                    else{
+                        alert('Something Went wrong')
+                    }
+                    //this.specialities = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		changeSpeciality(){
+			//alert(this.name_for_speciality_to_edit);
+			this.all_speciality_data[0]['speciality_id'] = this.id_for_speciality_to_edit;
+			this.all_speciality_data[0]['speciality_name'] = this.name_for_speciality_to_edit;
+			console.log(this.all_speciality_data);
+			
+			let token = window.localStorage.getItem('token');
+            AdminService.ChangeSpecialityService(token, this.all_speciality_data).then((response) => {
+                if(response.status==200){
+					if(response.data.status){
+
+						//alert('true')
+						location.reload();
+                        //this.$router.push({ path: '/admin/specialities' });
+                    }
+                    else{
+                        alert('Something Went wrong');
+                    }
+                    //this.specialities = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		editSpeciality(speciality){
+			//alert(speciality);
+			this.id_for_speciality_to_edit = speciality.id;
+			this.name_for_speciality_to_edit = speciality.title;
+			//alert(this.id_for_speciality_to_edit);
+
+		},
 		getAllSpecialities(){
 			let token = window.localStorage.getItem('token');
             AdminService.AllSpecialitiesService(token).then((response) => {

@@ -20,13 +20,13 @@
 												<div class="col-md-12 col-lg-4">
 													<div class="dash-widget dct-border-rht">
 														<div class="circle-bar circle-bar1">
-															<div class="circle-graph1" data-percent="75">
+															<div class="circle-graph1" data-percent="40">
 																<img src="@/assets/img/icon-01.png" class="img-fluid" alt="patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
 															<h6>Total Patient</h6>
-															<h3>1500</h3>
+															<h3>{{total_patients}}</h3>
 															<p class="text-muted">Till Today</p>
 														</div>
 													</div>
@@ -35,13 +35,13 @@
 												<div class="col-md-12 col-lg-4">
 													<div class="dash-widget dct-border-rht">
 														<div class="circle-bar circle-bar2">
-															<div class="circle-graph2" data-percent="65">
+															<div class="circle-graph2" data-percent="60">
 																<img src="@/assets/img/icon-02.png" class="img-fluid" alt="Patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
 															<h6>Today Patient</h6>
-															<h3>160</h3>
+															<h3>{{total_today_patients}}</h3>
 															<p class="text-muted">06, Nov 2019</p>
 														</div>
 													</div>
@@ -50,13 +50,13 @@
 												<div class="col-md-12 col-lg-4">
 														<div class="dash-widget">
 														<div class="circle-bar circle-bar3">
-															<div class="circle-graph3" data-percent="50">
+															<div class="circle-graph3" data-percent="90">
 																<img src="@/assets/img/icon-03.png" class="img-fluid" alt="Patient">
 															</div>
 														</div>
 														<div class="dash-widget-info">
 															<h6>Appoinments</h6>
-															<h3>85</h3>
+															<h3>{{total_appointments}}</h3>
 															<p class="text-muted">06, Apr 2019</p>
 														</div>
 													</div>
@@ -75,7 +75,7 @@
 										<!-- Appointment Tab -->
 										<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 											<li class="nav-item">
-												<a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+												<a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">All</a>
 											</li>
 											<li class="nav-item">
 												<a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
@@ -95,31 +95,31 @@
 																	<tr>
 																		<th>Patient Name</th>
 																		<th>Appt Date</th>
-																		<th>Purpose</th>
-																		<th>Type</th>
-																		<th class="text-center">Paid Amount</th>
+																		<th>Status</th>
+																		<!-- <th>Type</th> -->
+																		<!-- <th class="text-center">Paid Amount</th> -->
 																		<th></th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr v-for="item in upcomingpatients" :key="item.id">
+																	<tr v-for="item in this.upcoming_appointments" :key="item.id">
 																		<td>
 																			<h2 class="table-avatar">
-																				<a href="/patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="require('@/assets/img/patients/'+item.image)" alt="User Image"></a>
-																				<a href="/patient-profile">{{item.name}}<span>{{item.patient_id}}</span></a>
+																				<a href="" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="@/assets/img/doctors/doctor-11.jpg" alt="User Image"></a>
+																				<a href="">{{item.patient_name}}<span>#TH-{{item.id}}</span></a>
 																			</h2>
 																		</td>
-																		<td>{{item.appt_date}} <span class="d-block text-info">{{item.appt_time}}</span></td>
-																		<td>{{item.purpose}}</td>
-																		<td>{{item.type}}</td>
-																		<td class="text-center">{{item.paid_amount}}</td>
+																		<td>{{item.checkup_day_time}}</td>
+																		<td>{{item.status}}</td>
+																		<!-- <td>{{item.type}}</td> -->
+																		<!-- <td class="text-center">{{item.paid_amount}}</td> -->
 																		<td class="text-right">
 																			<div class="table-action">
-																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+																				<!-- <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
 																					<i class="far fa-eye"></i> View
-																				</a>
+																				</a> -->
 																				
-																				<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+																				<a v-if="item.status == 'booked'" href="#Add_Specialities_details" data-toggle="modal" @click="AcceptAppointment(item.id)"  class="btn btn-sm bg-success-light">
 																					<i class="fas fa-check"></i> Accept
 																				</a>
 																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
@@ -134,6 +134,38 @@
 													</div>
 												</div>
 											</div>
+											<!-- Add Modal -->
+			<div class="modal fade" id="Add_Specialities_details" aria-hidden="true" role="dialog">
+				<div class="modal-dialog modal-dialog-centered" role="document" >
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Please confirm your appointment</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form >
+								<div class="row form-row">
+									
+									
+												<div class="col-md-12 col-sm-12">
+													<div class="form-group card-label">
+														<label>Reset Booking</label>
+														<VueCtkDateTimePicker v-model="update_appointment_date" />
+														
+													</div>
+												</div>
+								
+									
+								</div>
+								<button @click="updateAppointment" class="btn btn-primary btn-block">Save Changes</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /ADD Modal -->
 											<!-- /Upcoming Appointment Tab -->
 									   
 											<!-- Today Appointment Tab -->
@@ -146,31 +178,29 @@
 																	<tr>
 																		<th>Patient Name</th>
 																		<th>Appt Date</th>
-																		<th>Purpose</th>
-																		<th>Type</th>
-																		<th class="text-center">Paid Amount</th>
+																		<th>Status</th>
+																		<!-- <th>Type</th>
+																		<th class="text-center">Paid Amount</th> -->
 																		<th></th>
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr v-for="item in todaypatients" :key="item.id">
+																	<tr v-for="item in this.today_appointments" :key="item.id">
 																		<td>
 																			<h2 class="table-avatar">
-																				<router-link to="/doctor/patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="require('@/assets/img/patients/'+item.image)" alt="User Image"></router-link>
-																				<router-link to="/doctor/patient-profile">{{item.name}}<span>{{item.patient_id}}</span></router-link>
+																				<router-link to="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="require('@/assets/img/doctors/doctor-11.jpg')" alt="User Image"></router-link>
+																				<router-link to="#">{{item.patient_name}}<span>#TH-{{item.id}}</span></router-link>
 																			</h2>
 																		</td>
-																		<td>{{item.appt_date}}<span class="d-block text-info">{{item.appt_time}}</span></td>
-																		<td>{{item.purpose}}</td>
-																		<td>{{item.type}}</td>
-																		<td class="text-center">{{item.paid_amount}}</td>
+																		<td>{{item.checkup_day_time}}</td>
+																		<td>{{item.status}}</td>
 																		<td class="text-right">
 																			<div class="table-action">
-																				<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+																				<!-- <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
 																					<i class="far fa-eye"></i> View
-																				</a>
+																				</a> -->
 																				
-																				<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+																				<a v-if="item.status == 'booked'" href="#Add_Specialities_details" data-toggle="modal" @click="AcceptAppointment(item.id)" class="btn btn-sm bg-success-light">
 																					<i class="fas fa-check"></i> Accept
 																				</a>
 																				<a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
@@ -202,6 +232,8 @@
 </template>
 
 <script>
+import TherapistService from '@/api-services/therapists.service';
+
 import upcomingpatients from '../../assets/json/doctor/upcomingpatients.json'
 import todaypatients from '../../assets/json/doctor/todaypatients.json'
 
@@ -209,8 +241,73 @@ export default {
 	data() {
 		return {
 			upcomingpatients: upcomingpatients,
-			todaypatients: todaypatients
+			todaypatients: todaypatients,
+			total_patients:'',
+			total_today_patients:'',
+			total_appointments:'',
+			today_appointments:{},
+			upcoming_appointments:{},
+			update_appointment_id:'',
+			update_appointment_date:'',
 		}
+	},
+	created() {
+    if(window.localStorage.getItem('token') !='' && window.localStorage.getItem('user') !='' && window.localStorage.getItem('role') =='therapist') {
+		this.getTherapistDashboardData();
+	}
+    else{ this.$router.push({ path: '/login'})}
+   
+	},
+	methods:{
+		updateAppointment(){
+			
+			let token = window.localStorage.getItem('token');
+            TherapistService.ChangeAppointmentStatusService(token, this.update_appointment_id, this.update_appointment_date).then((response) => {
+                if(response.status==200){
+					if(response.data.status){
+
+						//alert('true')
+						location.reload();
+                        //this.$router.push({ path: '/admin/specialities' });
+                    }
+                    else{
+                        alert('Something Went wrong');
+                    }
+                    //this.specialities = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		AcceptAppointment(appointmentID){
+
+			this.update_appointment_id = '';
+			this.update_appointment_id = appointmentID;
+			//alert(this.update_appointment_id);
+		},
+		getTherapistDashboardData(){
+			 let token = window.localStorage.getItem('token');
+            TherapistService.therapistDashboardAppointmentsService(token).then((response) => {
+                if(response.status==200){
+					
+                    this.total_patients = response.data.total_patients;
+                    this.total_today_patients = response.data.total_today_patients;
+                    this.total_appointments = response.data.total_appointments;
+                    this.today_appointments = response.data.today_appointments;
+                    this.upcoming_appointments = response.data.upcoming_appointments;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
 	},
 	mounted() {
 			$('.circle-bar1').each(function () {

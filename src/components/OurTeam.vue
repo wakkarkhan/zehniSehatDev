@@ -38,7 +38,7 @@
 																		<!-- <div v-if="singleArticle.check_articles" class="post-thumb my-post-thumb"> -->
 																		<div class="post-thumb my-post-thumb">
 																			<router-link to="/doctor/blog-details">
-																				<img class="img-fluid width-100" src="@/assets/img/blog/depression.jpeg" alt="">
+																				<img class="img-fluid width-100" src="@/assets/img/blog/blog-01_old.jpg" alt="">
 																			</router-link>
 																		</div>
 																		<div class="my-post-info">

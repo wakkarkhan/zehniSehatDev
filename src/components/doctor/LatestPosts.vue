@@ -2,14 +2,14 @@
     <!-- Latest Posts -->
         <div class="card post-widget">
             <div class="card-header">
-                <h4 class="card-title">Latest Posts</h4>
+                <h4 class="card-title">Related Posts</h4>
             </div>
             <div class="card-body">
                 <ul class="latest-posts">
                     <li v-for="singleRelatedArticle in this.related_articles" :key="singleRelatedArticle.id">
                         <div class="post-thumb">
                             <router-link to="/doctor/blog-details">
-                                <img class="img-fluid" src="@/assets/img/blog/blog-thumb-01.jpg" alt="">
+                                <img class="img-fluid" src="@/assets/img/blog/blog-01_old.jpg" alt="">
                             </router-link>
                         </div>
                         <div class="post-info">

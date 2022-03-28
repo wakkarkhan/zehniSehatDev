@@ -13,10 +13,10 @@
 								<div class="card-body">
 									<div class="booking-doc-info">
 										<router-link to="/doctor/profile" class="booking-doc-img">
-											<img src="@/assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+											<img src="@/assets/img/doctors/doctor-11.jpg" alt="User Image">
 										</router-link>
 										<div class="booking-info">
-											<h4><router-link to="/doctor/profile">Dr. Mary Nielson</router-link></h4>
+											<h4><router-link to="/doctor/profile">{{this.$route.params.doctor_name}}</router-link></h4>
 											<div class="rating">
 												<i class="fas fa-star filled"></i>
 												<i class="fas fa-star filled"></i>
@@ -31,15 +31,16 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-12 col-sm-4 col-md-6">
-									<h4 class="mb-1">11 November 2019</h4>
-									<p class="text-muted">Monday</p>
+								<div class="col-12 col-sm-6 col-md-6">
+										<datepicker class="col-12 col-sm-6 col-md-6" v-model="selectedDate" :format="customFormatter" @closed="checkDay"></datepicker>
 								</div>
-								<div class="col-12 col-sm-8 col-md-6 text-sm-right">
-									<div class="bookingrange btn btn-white btn-sm mb-3">
-										<i class="far fa-calendar-alt mr-2"></i>
-										<span></span>
-										<i class="fas fa-chevron-down ml-2"></i>
+								<div class="col-12 col-sm-6 col-md-6 text-sm-right">
+									<div class="bookingrange btn btn-sm mb-3">
+										<!-- <i class="far fa-calendar-alt mr-2"></i> -->
+									
+										<h4 class="mb-1">11 November 2019</h4>
+									<p class="text-muted">Monday</p>
+										<!-- <i class="fas fa-chevron-down ml-2"></i> -->
 									</div>
 								</div>
                             </div>
@@ -47,11 +48,11 @@
 							<div class="card booking-schedule schedule-widget">
 							
 								<!-- Schedule Header -->
-								<div class="schedule-header">
+								<!-- <div class="schedule-header">
 									<div class="row">
 										<div class="col-md-12">
 										
-											<!-- Day Slot -->
+											Day Slot
 											<div class="day-slot">
 												<ul>
 													<li class="left-arrow">
@@ -94,11 +95,11 @@
 													</li>
 												</ul>
 											</div>
-											<!-- /Day Slot -->
+											/Day Slot
 											
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- /Schedule Header -->
 								
 								<!-- Schedule Content -->
@@ -200,7 +201,9 @@
 							
 							<!-- Submit Section -->
 							<div class="submit-section proceed-btn text-right">
-								<router-link to="/patient/checkout" class="btn btn-primary submit-btn">Proceed to Pay</router-link>
+										<router-link class="apt-btn" :to="'/patient/checkout/'+this.$route.params.doctor_id+'/'+this.this.$route.params.doctor_name">Book Appointment</router-link>
+
+								<!-- <router-link to="/patient/checkout" class="btn btn-primary submit-btn">Proceed to Pay</router-link> -->
 							</div>
 							<!-- /Submit Section -->
 							
@@ -213,3 +216,26 @@
         <layout-footer></layout-footer>
     </div>
 </template>
+<script>
+import Datepicker from 'vuejs-datepicker';
+export default {
+	data(){
+		return {
+			selectedDate:''
+		}
+	},
+
+	methods: {
+		checkDay(){
+			alert(this.selectedDate.getDay());
+			alert(this.selectedDate.getDate());
+		},
+    	customFormatter(date) {
+	  		return moment(date).format('MMMM Do YYYY');
+		}
+	},
+	components: {
+    	Datepicker
+  	}
+}
+</script>

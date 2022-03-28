@@ -98,7 +98,7 @@
                 Functionally, the patient does not report limitations due to their symptoms.
               </p>
             
-              <a href="https://zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
+              <a href="https://www.zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
             </div>
             <div class="resultsInner" v-show="danger">
               
@@ -111,7 +111,7 @@
                 Functionally, the patient finds it is “extremely difficult” to perform life tasks due to their symptoms.
               </p>
               
-              <a href="https://zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
+              <a href="https://www.zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
             </div>
           </div>
        

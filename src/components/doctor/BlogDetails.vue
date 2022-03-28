@@ -11,7 +11,7 @@
 							<div class="blog-view">
 								<div class="blog blog-single-post">
 									<div class="blog-image">
-										<a href="javascript:void(0);"><img alt="" src="@/assets/img/blog/depression.jpeg" class="img-fluid"></a>
+										<a href="javascript:void(0);"><img alt="" :src='require("../../assets/img/blog/blog-01_old.jpg")' class="img-fluid"></a>
 									</div>
 									<h3 class="blog-title">{{this.singleArticleData.title}}</h3>
 									<div class="blog-info clearfix">
@@ -40,10 +40,10 @@
 						<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 
                             <!--Search Bar -->
-                                <search-bar></search-bar>
+                                <!-- <search-bar></search-bar> -->
                             <!-- /Search Bar -->
 							<!-- Latest Posts -->
-                                <latest-posts :related_articles="relatedArticlesData" ></latest-posts>
+                                <latest-posts :related_articles="relatedArticlesData"></latest-posts>
 							<!-- /Latest Posts -->
 
 							<!-- Categories -->

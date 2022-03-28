@@ -30,10 +30,9 @@
                                     </a>
                                 </div>
                                 <div class="col ml-md-n2 profile-user-info">
-                                    <h4 class="user-name mb-0">Ryan Taylor</h4>
-                                    <h6 class="text-muted">ryantaylor@admin.com</h6>
-                                    <div class="user-Location"><i class="fa fa-map-marker"></i> Florida, United States</div>
-                                    <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                    <h4 class="user-name mb-0">{{admin_data[0].full_name}}</h4>
+                                    <h6 class="text-muted">{{admin_data[0].email}}</h6>
+                                    <div class="user-Location"><i class="fa fa-map-marker"></i> Abbottabad, Pakistan</div>
                                 </div>
                                 <div class="col-auto profile-btn">
                                     
@@ -69,26 +68,23 @@
                                                 </h5>
                                                 <div class="row">
                                                     <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Name</p>
-                                                    <p class="col-sm-10">John Doe</p>
+                                                    <p class="col-sm-10">{{admin_data[0].full_name}}</p>
                                                 </div>
                                                 <div class="row">
                                                     <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Date of Birth</p>
-                                                    <p class="col-sm-10">24 Jul 1983</p>
+                                                    <p class="col-sm-10">{{admin_data[0].dob}}</p>
                                                 </div>
                                                 <div class="row">
                                                     <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
-                                                    <p class="col-sm-10">johndoe@example.com</p>
+                                                    <p class="col-sm-10">{{admin_data[0].email}}</p>
                                                 </div>
                                                 <div class="row">
                                                     <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Mobile</p>
-                                                    <p class="col-sm-10">305-310-5857</p>
+                                                    <p class="col-sm-10">{{admin_data[0].phone_number}}</p>
                                                 </div>
                                                 <div class="row">
                                                     <p class="col-sm-2 text-muted text-sm-right mb-0">Address</p>
-                                                    <p class="col-sm-10 mb-0">4663  Agriculture Lane,<br>
-                                                    Miami,<br>
-                                                    Florida - 33165,<br>
-                                                    United States.</p>
+                                                    <p class="col-sm-10 mb-0">{{admin_data[0].postal_adress}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +225,47 @@
     </div>
 </template>
 <script>
+import AdminService from '@/api-services/admin.service';
+
     export default {
+        data(){
+            return{
+                 admin_data:{},
+            }
+        },
+        created(){
+        if(window.localStorage.getItem('role') =='admin') {
+            this.getAdminProfileData();
+        }
+        else{
+            this.$router.push('/admin/login');
+        }
+    },
+    methods:{
+        getAdminProfileData(){
+            let token = window.localStorage.getItem('token');
+            AdminService.getAdminProfileService(token).then((response) => {
+                if(response.status==200){
+                    this.admin_data = response.data.data;
+                    //alert(this.admin_data[0].id);
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+
+        },
+        loadImg(imgPath, value) {
+            if(value == 1) {
+              return  images('./' + imgPath)
+            } else {
+              return  patientImages('./' + imgPath)
+            }
+        },
+    },
     mounted() {
         $(document).on('click', '#toggle_btn', function() {
 		if($('body').hasClass('mini-sidebar')) {

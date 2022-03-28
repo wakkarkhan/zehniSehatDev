@@ -108,22 +108,22 @@
                 <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                             <span class="user-img">
-                                <img class="rounded-circle" src="@/assets/img/doctors/doctor-thumb-02.jpg" width="31" alt="Darren Elder">
+                                <img class="rounded-circle" src="@/assets/img/doctors/doctor-11.jpg" width="31" alt="Darren Elder">
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="@/assets/img/doctors/doctor-thumb-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    <img src="@/assets/img/doctors/doctor-11.jpg" alt="User Image" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="user-text">
-                                    <h6>Dr. Mary Nielson</h6>
-                                    <p class="text-muted mb-0">Doctor</p>
+                                    <h6>{{therapist_data.full_name}}</h6>
+                                    <p class="text-muted mb-0">{{therapist_data.specialization}}</p>
                                 </div>
                             </div>
                             <router-link class="dropdown-item" to="/doctor/index">Dashboard</router-link>
                             <router-link class="dropdown-item" to="/doctor/profile-settings">Profile Settings</router-link>
-                            <router-link class="dropdown-item" to="/login">Logout</router-link>
+                            <a class="dropdown-item" @click="logoutTherapist">Logout</a>
                         </div>
                     </li>
             </ul>
@@ -132,8 +132,26 @@
     <!-- /Header -->
 </template>
 <script>
+import TherapistService from '@/api-services/therapists.service';
 
 export default {
+    data(){
+        return{
+            therapist_data:{}
+        }
+    },
+    methods:{
+        
+    },
+     created(){
+        
+        if(window.localStorage.getItem('role') =='therapist') {
+            this.getTherapistDashboardData();
+        }
+        else{
+            this.$router.push('/login');
+        }
+    },
   
         mounted() {
 			var $wrapper = $('.main-wrapper');
@@ -173,6 +191,26 @@ export default {
 
         },
          methods: {
+             logoutTherapist(){
+			this.$localStorage.remove('token');
+			this.$localStorage.remove('user');
+			this.$localStorage.remove('role');
+			this.$router.push('/login');
+		},
+        getTherapistDashboardData(){
+            let token = window.localStorage.getItem('token');
+            TherapistService.therapistDashboardService(token).then((response) => {
+                if(response.status==200){
+                    this.therapist_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+        },
 			dashboard(value) {
 				if(value == 1) {
 					let router = this.$router.resolve({path: '/admin/index'});

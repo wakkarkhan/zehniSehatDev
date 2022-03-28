@@ -37,14 +37,14 @@
 													<span class="or-line"></span>
 													<span class="span-or">or</span>
 												</div>
-												<div class="row form-row social-login">
+												<!-- <div class="row form-row social-login">
 													<div class="col-6">
 														<a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
 													</div>
 													<div class="col-6">
 														<a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
 													</div>
-												</div>
+												</div> -->
 												<div class="text-center dont-have">Don’t have an account? <router-link to="/patient/register">Register</router-link></div>
 											</form>
 										</div>
@@ -124,3 +124,8 @@ export default {
 	},	
 }
 </script>
+<style scoped>
+/* .account-page .content {
+    padding: 190px 0 !important;
+} */
+</style>

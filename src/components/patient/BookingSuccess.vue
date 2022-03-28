@@ -15,8 +15,9 @@
 									<div class="success-cont">
 										<i class="fas fa-check"></i>
 										<h3>Appointment booked Successfully!</h3>
-										<p>Appointment booked with <strong>Dr. Mary Nielson</strong><br> on <strong>12 Nov 2019 5:00PM to 6:00PM</strong></p>
-										<router-link to="/invoice-view" class="btn btn-primary view-inv-btn">View Invoice</router-link>
+										<p>Appointment booked with <strong>{{this.$route.params.doctor_name}}</strong><br></p>
+										<p>Please check your Email. <strong>You can login to your dashboard Now</strong><br></p>
+										<router-link to="/login" class="btn btn-primary view-inv-btn">Login</router-link>
 									</div>
 								</div>
 							</div>

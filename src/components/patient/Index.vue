@@ -24,15 +24,15 @@
 											<li class="nav-item">
 												<a class="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
 											</li>
-											<li class="nav-item">
+											<!-- <li class="nav-item">
 												<a class="nav-link" href="#pat_prescriptions" data-toggle="tab">Prescriptions</a>
 											</li>
 											<li class="nav-item">
 												<a class="nav-link" href="#pat_medical_records" data-toggle="tab"><span class="med-records">Medical Records</span></a>
-											</li>
-											<li class="nav-item">
+											</li> -->
+											<!-- <li class="nav-item">
 												<a class="nav-link" href="#pat_billing" data-toggle="tab">Billing</a>
-											</li>
+											</li> -->
 										</ul>
 									</nav>
 									<!-- /Tab Menu -->
@@ -48,33 +48,37 @@
 														<table class="table table-hover table-center mb-0">
 															<thead>
 																<tr>
-																	<th>Doctor</th>
-																	<th>Appt Date</th>
+																	<th>Therapist</th>
+																	<th>Applied Date</th>
 																	<th>Booking Date</th>
-																	<th>Amount</th>
+																	<!-- <th>Amount</th> -->
 																	<th>Follow Up</th>
 																	<th>Status</th>
 																	<th></th>
 																</tr>
 															</thead>
 															<tbody>
-																<tr v-for="item in appointments" :key="item.id">
+																<tr v-for="item in patient_appointments_data" :key="item.id">
 																	<td>
 																		<h2 class="table-avatar">
-																			<router-link to="/doctor/profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" :src="loadImg(item.doctor_image)" alt="User Image">
+																			<router-link to="#" class="avatar avatar-sm mr-2">
+																				<img class="avatar-img rounded-circle" :src="loadImg()" alt="User Image">
 																			</router-link>
-																			<router-link to="/doctor/profile">{{item.doctor_name}}<span>{{item.category}}</span></router-link>
+																			<router-link to="#">{{item.full_name}}<span>{{item.therapist_speciality}}</span></router-link>
 																		</h2>
 																	</td>
-																	<td>{{item.appt_date}}<span class="d-block text-info">{{item.appt_time}}</span></td>
-																	<td>{{item.booking_date}}</td>
-																	<td>{{item.amount}}</td>
-																	<td>{{item.follow_up}}</td>
-																	<td>
+																	<td>{{item.created_at}}</td>
+																	<td>{{item.checkup_day_time}}</td>
+																	<!-- <td>Amount</td> -->
+																	<td>--</td>
+																	<!-- <td>
                                                                         <span class="badge badge-pill bg-success-light" v-if="item.status == 'Confirm'">Confirm</span>
                                                                         <span class="badge badge-pill bg-danger-light" v-if="item.status == 'Cancelled'">Cancelled</span>
                                                                         <span class="badge badge-pill bg-warning-light" v-if="item.status == 'Pending'">Pending</span>
+                                                                    </td> -->
+																	<td>
+                                                                        <span class="badge badge-pill bg-warning-light" v-if="item.status == 'booked'">{{item.status}}</span>
+                                                                        <span class="badge badge-pill bg-success-light" v-if="item.status == 'confirmed'">{{item.status}}</span>
                                                                     </td>
 																	<td class="text-right">
 																		<div class="table-action">
@@ -95,102 +99,12 @@
 										</div>
 										<!-- /Appointment Tab -->
 										
-										<!-- Prescription Tab -->
-										<div class="tab-pane fade" id="pat_prescriptions">
-											<div class="card card-table mb-0">
-												<div class="card-body">
-													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
-															<thead>
-																<tr>
-																	<th>Date </th>
-																	<th>Name</th>									
-																	<th>Created by </th>
-																	<th></th>
-																</tr>     
-															</thead>
-															<tbody>
-																<tr v-for="item in prescriptions" :key="item.id">
-																	<td>{{item.date}}</td>
-																	<td>{{item.name}}</td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<router-link to="/doctor/profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" :src="loadImg(item.image)" alt="User Image">
-																			</router-link>
-																			<router-link to="/doctor/profile">{{item.created_by}} <span>{{item.category}}</span></router-link>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>	
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- /Prescription Tab -->
+										
 											
-										<!-- Medical Records Tab -->
-										<div id="pat_medical_records" class="tab-pane fade">
-											<div class="card card-table mb-0">
-												<div class="card-body">
-													<div class="table-responsive">
-														<table class="table table-hover table-center mb-0">
-															<thead>
-																<tr>
-																	<th>ID</th>
-																	<th>Date </th>
-																	<th>Description</th>
-																	<th>Attachment</th>
-																	<th>Created</th>
-																	<th></th>
-																</tr>     
-															</thead>
-															<tbody>
-																<tr v-for="item in medicalrecords" :key="item.id">
-																	<td><a href="javascript:void(0);">{{item.record_no}}</a></td>
-																	<td>{{item.date}}</td>
-																	<td>{{item.description}}</td>
-																	<td><a href="#">{{item.attachment}}</a></td>
-																	<td>
-																		<h2 class="table-avatar">
-																			<router-link to="/doctor/profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" :src="loadImg(item.doctor_image)" alt="User Image">
-																			</router-link>
-																			<router-link to="/doctor/profile">{{item.created_by}}<span>{{item.category}}</span></router-link>
-																		</h2>
-																	</td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>  	
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- /Medical Records Tab -->
+									
 										
 										<!-- Billing Tab -->
-										<div id="pat_billing" class="tab-pane fade">
+										<!-- <div id="pat_billing" class="tab-pane fade">
 											<div class="card card-table mb-0">
 												<div class="card-body">
 													<div class="table-responsive">
@@ -235,7 +149,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 										<!-- /Billing Tab -->
 										  
 									</div>
@@ -255,6 +169,8 @@
 </template>
 
 <script>
+import PatientService from '@/api-services/patient.service';
+
 import appointments from '../../assets/json/patient/appointments.json'
 import prescriptions from '../../assets/json/patient/prescriptions.json'
 import medicalrecords from '../../assets/json/patient/medicalrecords.json'
@@ -267,17 +183,35 @@ export default {
             appointments: appointments,
             prescriptions: prescriptions,
             medicalrecords: medicalrecords,
-            billing: billing  
+			billing: billing  ,
+			patient_appointments_data:{}
         };
 	},
 	created() {
-    if(window.localStorage.getItem('token') !=''&& window.localStorage.getItem('user') !='' && window.localStorage.getItem('role') =='patient') {}
+    if(window.localStorage.getItem('token') !='' && window.localStorage.getItem('user') !='' && window.localStorage.getItem('role') =='patient') {
+		this.getAppointmentsData();
+	}
     else{ this.$router.push({ path: '/login'})}
    
   	},
     methods: {
+		getAppointmentsData(){
+			 let token = window.localStorage.getItem('token');
+            PatientService.patientAppointmentService(token).then((response) => {
+                if(response.status==200){
+					
+                    this.patient_appointments_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
         loadImg(imgPath) {
-            return images('./' + imgPath)
+            return images('./' + 'doctor-11.jpg')
         },
     },
 }

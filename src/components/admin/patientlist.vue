@@ -10,11 +10,10 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title">List of Patient</h3>
+								<h3 class="page-title">List of Patients</h3>
 								<ul class="breadcrumb">
 									<li class="breadcrumb-item"><router-link to="/admin/index">Dashboard</router-link></li>
-									<li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
-									<li class="breadcrumb-item active">Patient</li>
+									<li class="breadcrumb-item active">Patients</li>
 								</ul>
 							</div>
 						</div>
@@ -32,7 +31,7 @@
 												<tr>
 													<th>Patient ID</th>
 													<th>Patient Name</th>
-													<th>Age</th>
+													<th>Gender</th>
 													<th>Address</th>
 													<th>Phone</th>
 													<th>Last Visit</th>
@@ -41,18 +40,18 @@
 											</thead>
 											<tbody>
 												<tr v-for="item in patientlist" :key="item.id">
-													<td>{{item.patientid}}</td>
+													<td>#PT00{{item.id}}</td>
 													<td>
 														<h2 class="table-avatar">
-															<router-link to="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="loadImg(item.image)" alt="User Image"></router-link>
-															<router-link to="/admin/profile">{{item.patientname}} </router-link>
+															<router-link to="/admin/profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" :src="loadImg()" alt="User Image"></router-link>
+															<router-link to="/admin/profile">{{item.full_name}} </router-link>
 														</h2>
 													</td>
-													<td>{{item.age}}</td>
-													<td>{{item.address}}</td>
-													<td>{{item.phno}}</td>
-													<td>{{item.lastvisit}}</td>
-													<td class="text-right">{{item.paid}}</td>
+													<td>{{item.gender}}</td>
+													<td>{{item.postal_adress}}</td>
+													<td>{{item.phone_number}}</td>
+													<td>Last Visit</td>
+													<td class="text-right">Paid Amount</td>
 												</tr>
 											</tbody>
 										</table>
@@ -69,22 +68,57 @@
             </div>
 </template>
 <script>
-    import patientlist from '../../assets/json/admin/Patientlist/patientlist.json'
+import AdminService from '@/api-services/admin.service';
+
+    // import patientlist from '../../assets/json/admin/Patientlist/patientlist.json'
     const images = require.context('@/assets/admin_img/patients', false, /\.png$|\.jpg$/)
     export default {
         data() {
 		return {
-			patientlist: patientlist
+			patientlist: {}
 		}
 	},
+	created()
+	{
+		if(window.localStorage.getItem('role') =='admin') 
+		{
+			this.getAllPatients();
+        }
+        else{
+            this.$router.push('/admin/login');
+        }
+    },
+    methods:{
+		getAllPatients(){
+			let token = window.localStorage.getItem('token');
+            AdminService.getAllPatientsService(token).then((response) => {
+                if(response.status==200){
+                    this.patientlist = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+        loadImg() {
+			// if(value == 2) {
+			// 	return images('./' + imgPath)
+			// } else {
+			 	return images('./'  + 'patient1.jpg')
+			// }
+        },
+    },
     mounted() {
 		 // Datatable
 
-		 if ($('.datatable').length > 0) {
-        $('.datatable').DataTable({
-          "bFilter": false,
-        });
-      }
+	// 	 if ($('.datatable').length > 0) {
+    //     $('.datatable').DataTable({
+    //       "bFilter": false,
+    //     });
+    //   }
         $(document).on('click', '#toggle_btn', function() {
 		if($('body').hasClass('mini-sidebar')) {
 			$('body').removeClass('mini-sidebar');
@@ -114,10 +148,5 @@
 		}
     });
 },
-methods:{
-        loadImg(imgPath) {
-            return images('./' + imgPath)
-        },
-    }
     }
 </script>

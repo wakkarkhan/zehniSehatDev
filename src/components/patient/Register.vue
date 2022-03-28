@@ -1,5 +1,5 @@
 <template>
-    <div class="main-wrapper">
+    <div class="main-wrapper patient-register">
         <layout-header></layout-header>
         <!-- Page Content -->
 			<div class="content bg-white">
@@ -38,18 +38,18 @@
 												<router-link class="forgot-link" to="/login">Already have an account?</router-link>
 											</div>
 											<button @click.prevent="registerPatient" class="btn btn-primary btn-block btn-lg login-btn" >Signup</button>
-											<div class="login-or">
+											<!-- <div class="login-or">
 												<span class="or-line"></span>
 												<span class="span-or">or</span>
-											</div>
-											<div class="row form-row social-login">
+											</div> -->
+											<!-- <div class="row form-row social-login">
 												<div class="col-6">
 													<a href="#" class="btn btn-facebook btn-block"><i class="fab fa-facebook-f mr-1"></i> Login</a>
 												</div>
 												<div class="col-6">
 													<a href="#" class="btn btn-google btn-block"><i class="fab fa-google mr-1"></i> Login</a>
 												</div>
-											</div>
+											</div> -->
 										</form>
 										<!-- /Register Form -->
 										
@@ -102,7 +102,7 @@ export default {
 				// 	if(response.data.status==200){
 				// 		alert('in');
 						this.responseData = response.data;
-						alert(this.responseData.data.status);
+						//alert(this.responseData.data.status);
 						if(this.responseData.data.status){
 							
 							this.failedMessage = false;
@@ -123,3 +123,8 @@ export default {
     },
 }
 </script>
+<style scoped>
+/* .patient-register .content {
+    padding: 190px 0 !important;
+} */
+</style>

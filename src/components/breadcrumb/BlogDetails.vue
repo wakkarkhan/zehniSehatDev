@@ -1,6 +1,6 @@
 <template>
     <!-- Breadcrumb -->
-    <div class="breadcrumb-bar">
+    <div class="breadcrumb-bar my-breadcrumb">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-auto text-end float-end ms-auto">
                     <!-- <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add_event">Self Assessment</a> -->
-				    <router-link class="btn btn-primary btn-sm" to="/doctor/assessment/">Self-Assessment</router-link>
+				    <router-link class="btn btn-primary btn-sm" to="/assesments">Self-Assessment</router-link>
 
                 </div>
             </div>
@@ -22,3 +22,9 @@
     </div>
     <!-- /Breadcrumb -->
 </template>
+<style scoped>
+.my-breadcrumb{
+    position: relative;
+    top: 100px;
+}
+</style>

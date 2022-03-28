@@ -117,7 +117,7 @@
             <p class="color-white font-18">
               WARNING: This patient is having thoughts concerning for suicidal ideation or self-harm, and should be probed further, referred, or transferred for emergency psychiatric evaluation as clinically appropriate and depending on clinician overall risk assessment.
             </p>
-            <a href="https://zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
+            <a href="https://www.zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
           </div>
           <div class="resultsInner" v-show="ultraHigh">
             
@@ -132,7 +132,7 @@
             <p class="color-white font-18">
               WARNING: This patient is having thoughts concerning for suicidal ideation or self-harm, and should be probed further, referred, or transferred for emergency psychiatric evaluation as clinically appropriate and depending on clinician overall risk assessment.
             </p>
-            <a href="https://zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
+            <a href="https://www.zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
           </div>
           <div class="resultsInner" v-show="danger">
             
@@ -147,7 +147,7 @@
             <p class="color-white font-18">
               WARNING: This patient is having thoughts concerning for suicidal ideation or self-harm, and should be probed further, referred, or transferred for emergency psychiatric evaluation as clinically appropriate and depending on clinician overall risk assessment.
             </p>
-            <a href="https://zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
+            <a href="https://www.zehnisehat.com/#/doctor/search" class="btn btn-secondary mt-5 color-white">Consult Therapist</a>
           </div>
         </div>
       </div>

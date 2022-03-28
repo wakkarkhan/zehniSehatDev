@@ -124,7 +124,7 @@
 							<router-link class="dropdown-item" to="/patient/index">Dashboard</router-link>
 							<router-link class="dropdown-item" to="/patient/profile">Profile Settings</router-link>
 							<!-- <router-link class="dropdown-item" @click.prevent="logoutPatient">Logout</router-link> -->
-							<a aria-current="page" class="dropdown-item" @click.prevent="logoutPatient">Logout</a>
+							<a aria-current="page" class="dropdown-item cursor" @click.prevent="logoutPatient">Logout</a>
 						</div>
 					</li>
 					<!-- /User Menu -->
@@ -216,3 +216,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.cursor{
+    cursor: pointer;
+}
+</style>

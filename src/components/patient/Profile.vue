@@ -16,7 +16,7 @@
 								<div class="card-body">
 									
 									<!-- Profile Settings Form -->
-									<form>
+									<form @submit.prevent="updatePatientData">
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
 												<div class="form-group">
@@ -34,84 +34,62 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
+											<div class="col-12 col-md-12">
 												<div class="form-group">
-													<label>First Name</label>
-													<input type="text" class="form-control" value="Richard">
+													<label>Full Name</label>
+													<input v-model="patient_data.full_name" type="text" class="form-control" required>
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Last Name</label>
-													<input type="text" class="form-control" value="Wilson">
-												</div>
-											</div>
+											
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Date of Birth</label>
 													<div class="cal-icon">
-														<input type="text" class="form-control datetimepicker" value="24-07-1983">
+														<input v-model="patient_data.dob" type="text" class="form-control datetimepicker" required>
 													</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Blood Group</label>
-													<select class="form-control select">
-														<option>A-</option>
-														<option>A+</option>
-														<option>B-</option>
-														<option>B+</option>
-														<option>AB-</option>
-														<option>AB+</option>
-														<option>O-</option>
-														<option>O+</option>
+													<select v-model="patient_data.blood_group" class="form-control select" required>
+														<option value="A">A-</option>
+														<option value="A+">A+</option>
+														<option value="B">B-</option>
+														<option value="B+">B+</option>
+														<option value="AB-">AB-</option>
+														<option value="AB+">AB+</option>
+														<option value="O">O-</option>
+														<option value="0+">O+</option>
 													</select>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>Email ID</label>
-													<input type="email" class="form-control" value="richard@example.com">
+													<label>Gender</label>
+													<select v-model="patient_data.gender" class="form-control select" required>
+														<option value="Male">Male</option>
+														<option value="Female">Female</option>
+														<option value="Other">Other</option>
+														
+													</select>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
-													<label>Mobile</label>
-													<input type="text" value="+1 202-555-0125" class="form-control">
+													<label>Phone</label>
+													<input type="text" v-model="patient_data.phone_number" class="form-control" required>
 												</div>
 											</div>
 											<div class="col-12">
 												<div class="form-group">
-												<label>Address</label>
-													<input type="text" class="form-control" value="806 Twin Willow Lane">
+												<label>Postal Address</label>
+													<input type="text" class="form-control" v-model="patient_data.postal_adress" required>
 												</div>
 											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control" value="Old Forge">
-												</div>
-											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>State</label>
-													<input type="text" class="form-control" value="Newyork">
-												</div>
-											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Zip Code</label>
-													<input type="text" class="form-control" value="13420">
-												</div>
-											</div>
-											<div class="col-12 col-md-6">
-												<div class="form-group">
-													<label>Country</label>
-													<input type="text" class="form-control" value="United States">
-												</div>
-											</div>
+											
 										</div>
+										
 										<div class="submit-section">
 											<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
 										</div>
@@ -131,7 +109,57 @@
 </template>
 
 <script>
+import PatientService from '@/api-services/patient.service';
+
 export default {
+	data(){
+        return{
+            patient_data:{}
+        }
+	},
+	methods:{
+		updatePatientData(){
+			let token = window.localStorage.getItem('token');
+            //let therapistID = this.$route.params.therapist_id;
+            PatientService.updatePatientDataService(token, this.patient_data).then((response) => {
+                if(response.status==200){
+                    
+                    //console.log(this.therapist_login_data[0]['login_info']);
+                    //alert('true');
+                    location.reload();
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+        getPatientDashboadData(){
+            let token = window.localStorage.getItem('token');
+            PatientService.patientDashboardService(token).then((response) => {
+                if(response.status==200){
+                    this.patient_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+        }
+	},
+	created(){
+        
+        if(window.localStorage.getItem('role') =='patient') {
+            this.getPatientDashboadData();
+        }
+        else{
+            this.$router.push('/login');
+        }
+    },
 	mounted() {
         if($('.select').length > 0) {
             $('.select').select2({

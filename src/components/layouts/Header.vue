@@ -44,10 +44,10 @@
                            <router-link to="/assesments">Self Assessment </router-link>
                         </li>
                         <li class="has-submenu" :class=" homeMenu ? 'active' : 'notactive'">
-                           <router-link to="/">About </router-link>
+                           <router-link to="/about-us">About </router-link>
                         </li> 
                         <li class="has-submenu" :class=" homeMenu ? 'active' : 'notactive'">
-                           <router-link to="/">Contact </router-link>
+                           <router-link to="/contact-us">Contact </router-link>
                         </li> 
                        
                        <!-- <li class="has-submenu" :class="doctorMenu ? 'active' : 'notactive'">

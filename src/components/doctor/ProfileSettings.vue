@@ -11,7 +11,7 @@
                             <sidebar></sidebar>
 						</div>
 						<div class="col-md-7 col-lg-8 col-xl-9">
-						
+							<form @submit.prevent="updateTherapistData">
 							<!-- Basic Information -->
 							<div class="card">
 								<div class="card-body">
@@ -21,7 +21,7 @@
 											<div class="form-group">
 												<div class="change-avatar">
 													<div class="profile-img">
-														<img src="@/assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+														<img src="@/assets/img/doctors/doctor-11.jpg" alt="User Image">
 													</div>
 													<div class="upload-img">
 														<div class="change-photo-btn">
@@ -33,43 +33,51 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Username <span class="text-danger">*</span></label>
-												<input type="text" class="form-control" readonly>
-											</div>
-										</div>
+										
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Email <span class="text-danger">*</span></label>
-												<input type="email" class="form-control" readonly>
+												<input v-model="all_therapist_data.general_info[0].email" type="email" class="form-control" readonly>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label>First Name <span class="text-danger">*</span></label>
-												<input type="text" class="form-control">
+												<label>Full Name <span class="text-danger">*</span></label>
+												<input v-model="all_therapist_data.general_info[0].full_name" type="text" class="form-control">
 											</div>
 										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Last Name <span class="text-danger">*</span></label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
+										
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Phone Number</label>
-												<input type="text" class="form-control">
+												<input v-model="all_therapist_data.general_info[0].phone_number" type="number" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Gender</label>
-												<select class="form-control select">
-													<option>Select</option>
-													<option>Male</option>
-													<option>Female</option>
+												<select v-model="all_therapist_data.general_info[0].gender" class="form-control select">
+												
+													<!-- <option :value="this.all_therapist_data.general_info[0].gender">{{this.all_therapist_data.general_info[0].gender}}</option> -->
+													<option value="Male">Male</option>
+													<option value="Female">Female</option>
+													<option value="Other">Other</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Blood Group</label>
+												<select v-model="all_therapist_data.general_info[0].blood_group" class="form-control select">
+													<!-- <option :value="this.all_therapist_data.general_info[0].blood_group">{{this.all_therapist_data.general_info[0].blood_group}}</option> -->
+													<option value="A">A-</option>
+													<option value="A+">A+</option>
+													<option value="AB+">AB+</option>
+													<option value="AB-">AB-</option>
+													<option value="B+">B+</option>
+													<option value="B-">B-</option>
+													<option value="O+">O+</option>
+													<option value="O-">O-</option>
 												</select>
 											</div>
 										</div>
@@ -77,7 +85,7 @@
 											<div class="form-group mb-0">
 												<label>Date of Birth</label>
 												<div class="cal-icon">
-													<input type="text" class="form-control datetimepicker" value="24-07-1983">
+													<input v-model="all_therapist_data.general_info[0].dob" type="text" class="form-control datetimepicker" >
 												</div>
 											</div>
 										</div>
@@ -90,179 +98,73 @@
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">About Me</h4>
-									<div class="form-group mb-0">
-										<label>Biography</label>
-										<textarea class="form-control" rows="5"></textarea>
+									
+								<div class="row form-row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Specialization</label>
+											<select v-model="all_therapist_data.bio_info[0].category_id" class="form-control select">
+												<option v-for="singleSpeciality in specialities" :key="singleSpeciality.id" :value="singleSpeciality.id">{{singleSpeciality.title}}</option>
+											</select>
+										</div>
 									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Fee</label>
+											<input v-model="all_therapist_data.bio_info[0].therapist_fee" type="number" class="form-control">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<label>Biography</label>
+										<textarea v-model="all_therapist_data.bio_info[0].about_therapist"  class="form-control" rows="5"></textarea>
+									</div>
+								</div>
 								</div>
 							</div>
 							<!-- /About Me -->
 							
-							<!-- Clinic Info -->
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Clinic Info</h4>
-									<div class="row form-row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Clinic Name</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Clinic Address</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="form-group">
-												<label>Clinic Images</label>
-												<form action="#" class="dropzone"></form>
-											</div>
-											<div class="upload-wrap">
-												<div class="upload-images">
-													<img src="@/assets/img/features/feature-01.jpg" alt="Upload Image">
-													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-												</div>
-												<div class="upload-images">
-													<img src="@/assets/img/features/feature-02.jpg" alt="Upload Image">
-													<a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Clinic Info -->
+						
 
-							<!-- Contact Details -->
-							<div class="card contact-card">
-								<div class="card-body">
-									<h4 class="card-title">Contact Details</h4>
-									<div class="row form-row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Address Line 1</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">Address Line 2</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">City</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">State / Province</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">Country</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="control-label">Postal Code</label>
-												<input type="text" class="form-control">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /Contact Details -->
 							
-							<!-- Pricing -->
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Pricing</h4>
-									
-									<div class="form-group mb-0">
-										<div id="pricing_select">
-											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="price_free" name="rating_option" class="custom-control-input" value="price_free" checked>
-												<label class="custom-control-label" for="price_free">Free</label>
-											</div>
-											<div class="custom-control custom-radio custom-control-inline">
-												<input type="radio" id="price_custom" name="rating_option" value="custom_price" class="custom-control-input">
-												<label class="custom-control-label" for="price_custom">Custom Price (per hour)</label>
-											</div>
-										</div>
-
-									</div>
-									
-									<div class="row custom_price_cont" id="custom_price_cont" style="display: none;">
-										<div class="col-md-4">
-											<input type="text" class="form-control" id="custom_rating_input" name="custom_rating_count" value="" placeholder="20">
-											<small class="form-text text-muted">Custom price you can add</small>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							<!-- /Pricing -->
+						
 							
-							<!-- Services and Specialization -->
-							<div class="card services-card">
-								<div class="card-body">
-									<h4 class="card-title">Services and Specialization</h4>
-									<div class="form-group">
-										<label>Services</label>
-										<input type="text" data-role="tagsinput" class="input-tags form-control" placeholder="Enter Services" name="services" value="Tooth cleaning " id="services">
-										<small class="form-text text-muted">Note : Type & Press enter to add new services</small>
-									</div> 
-									<div class="form-group mb-0">
-										<label>Specialization </label>
-										<input class="input-tags form-control" type="text" data-role="tagsinput" placeholder="Enter Specialization" name="specialist" value="Children Care,Psychiatrist Care" id="specialist">
-										<small class="form-text text-muted">Note : Type & Press  enter to add new specialization</small>
-									</div> 
-								</div>              
-							</div>
-							<!-- /Services and Specialization -->
+							
 						 
 							<!-- Education -->
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Education</h4>
 									<div class="education-info">
-										<div class="row form-row education-cont">
+										<div class="row form-row education-cont" v-for="(singleEducation,k) in this.all_therapist_data.education_info" :key="k">
 											<div class="col-12 col-md-10 col-lg-11">
 												<div class="row form-row">
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-4 col-lg-4">
 														<div class="form-group">
 															<label>Degree</label>
-															<input type="text" class="form-control">
+															<input v-model="singleEducation.degree_program" type="text" class="form-control">
 														</div> 
 													</div>
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-4 col-lg-4">
 														<div class="form-group">
 															<label>College/Institute</label>
-															<input type="text" class="form-control">
+															<input v-model="singleEducation.university_name" type="text" class="form-control">
 														</div> 
 													</div>
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-3 col-lg-3">
 														<div class="form-group">
 															<label>Year of Completion</label>
-															<input type="text" class="form-control">
+															<input v-model="singleEducation.tenure" type="text" class="form-control">
 														</div> 
 													</div>
+													<div class="col-12 col-md-1 col-lg-1 p-6">
+                                                                <div class="add-more "><a @click="removeEducation(k)" class="add-education-button"><i class="fas fa-minus-circle" @click="remove(k)" v-show="k || ( !k && singleEducation.length > 1)">Remove</i></a></div>
+                                                    </div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="add-more">
-										<a href="javascript:void(0);" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
+										<a @click="addEducation(k)" class="add-education"><i class="fa fa-plus-circle"></i> Add More</a>
 									</div>
 								</div>
 							</div>
@@ -273,123 +175,57 @@
 								<div class="card-body">
 									<h4 class="card-title">Experience</h4>
 									<div class="experience-info">
-										<div class="row form-row experience-cont">
+										<div class="row form-row experience-cont" v-for="(singleExperience,x) in this.all_therapist_data.work_info" :key="'Ex'+x">
 											<div class="col-12 col-md-10 col-lg-11">
 												<div class="row form-row">
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
-															<label>Hospital Name</label>
-															<input type="text" class="form-control">
+															<label>Organization</label>
+															<input v-model="singleExperience.organization_name" type="text" class="form-control">
 														</div> 
 													</div>
-													<div class="col-12 col-md-6 col-lg-4">
-														<div class="form-group">
-															<label>From</label>
-															<input type="text" class="form-control">
-														</div> 
-													</div>
-													<div class="col-12 col-md-6 col-lg-4">
-														<div class="form-group">
-															<label>To</label>
-															<input type="text" class="form-control">
-														</div> 
-													</div>
-													<div class="col-12 col-md-6 col-lg-4">
+													<div class="col-12 col-md-6 col-lg-3">
 														<div class="form-group">
 															<label>Designation</label>
-															<input type="text" class="form-control">
+															<input v-model="singleExperience.designation" type="text" class="form-control">
 														</div> 
 													</div>
+													<div class="col-12 col-md-6 col-lg-2">
+														<div class="form-group">
+															<label>From</label>
+															<input v-model="singleExperience.tenure" type="text" class="form-control">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-2">
+														<div class="form-group">
+															<label>To</label>
+															<input v-model="singleExperience.tenure" type="text" class="form-control">
+														</div> 
+													</div>
+													<div class="col-12 col-md-6 col-lg-2">
+                                                                <div class="add-more "><a @click="removeExperience(x)" class="add-education-button"><i class="fas fa-minus-circle" v-show="x || ( !x && singleExperience.length > 1)">Remove</i></a></div>
+                                                    </div>
+													
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="add-more">
-										<a href="javascript:void(0);" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
+										<a @click="addExperience()" class="add-experience"><i class="fa fa-plus-circle"></i> Add More</a>
 									</div>
 								</div>
 							</div>
 							<!-- /Experience -->
 							
-							<!-- Awards -->
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Awards</h4>
-									<div class="awards-info">
-										<div class="row form-row awards-cont">
-											<div class="col-12 col-md-5">
-												<div class="form-group">
-													<label>Awards</label>
-													<input type="text" class="form-control">
-												</div> 
-											</div>
-											<div class="col-12 col-md-5">
-												<div class="form-group">
-													<label>Year</label>
-													<input type="text" class="form-control">
-												</div> 
-											</div>
-										</div>
-									</div>
-									<div class="add-more">
-										<a href="javascript:void(0);" class="add-award"><i class="fa fa-plus-circle"></i> Add More</a>
-									</div>
-								</div>
-							</div>
-							<!-- /Awards -->
+						
+					
 							
-							<!-- Memberships -->
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Memberships</h4>
-									<div class="membership-info">
-										<div class="row form-row membership-cont">
-											<div class="col-12 col-md-10 col-lg-5">
-												<div class="form-group">
-													<label>Memberships</label>
-													<input type="text" class="form-control">
-												</div> 
-											</div>
-										</div>
-									</div>
-									<div class="add-more">
-										<a href="javascript:void(0);" class="add-membership"><i class="fa fa-plus-circle"></i> Add More</a>
-									</div>
-								</div>
-							</div>
-							<!-- /Memberships -->
-							
-							<!-- Registrations -->
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Registrations</h4>
-									<div class="registrations-info">
-										<div class="row form-row reg-cont">
-											<div class="col-12 col-md-5">
-												<div class="form-group">
-													<label>Registrations</label>
-													<input type="text" class="form-control">
-												</div> 
-											</div>
-											<div class="col-12 col-md-5">
-												<div class="form-group">
-													<label>Year</label>
-													<input type="text" class="form-control">
-												</div> 
-											</div>
-										</div>
-									</div>
-									<div class="add-more">
-										<a href="javascript:void(0);" class="add-reg"><i class="fa fa-plus-circle"></i> Add More</a>
-									</div>
-								</div>
-							</div>
-							<!-- /Registrations -->
+						
 							
 							<div class="submit-section submit-btn-bottom">
 								<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
 							</div>
-							
+						</form>	
 						</div>
 					</div>
 
@@ -402,7 +238,100 @@
 </template>
 
 <script>
+import TherapistService from '@/api-services/therapists.service';
+
 export default {
+	data(){
+		return{
+			all_therapist_data:{},
+			specialities:{},
+		}
+	},
+	created(){
+        if(window.localStorage.getItem('role') =='therapist') {
+			this.getAllTherapistData();
+			this.getTherapistAllSpecialities();
+        }
+        else{
+            this.$router.push('/login');
+        }
+	},
+	methods:{
+		updateTherapistData(){
+			let token = window.localStorage.getItem('token');
+        //     let therapist = {
+        //     "therapist_bio":this.therapist_bio
+        // }
+            TherapistService.updateTherapistService(token,this.all_therapist_data).then((response) => {
+                if(response.status==200){
+                    if(response.data.status){
+
+						alert('true')
+						//location.reload();
+					}
+                    else{
+                        alert('Something Went wrong')
+                    }
+                    
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		getTherapistAllSpecialities(){
+			let token = window.localStorage.getItem('token');
+            TherapistService.therapistAllSpecialitiesService(token).then((response) => {
+                if(response.status==200){
+                    this.specialities = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		addExperience () {
+            this.all_therapist_data.work_info.push({
+                designation: '',
+                tenure: '',
+                organization_name: '',
+            })
+        },
+		addEducation () {
+            this.all_therapist_data.education_info.push({
+                degree_program: '',
+                tenure: '',
+                university_name: '',
+            })
+        },
+		removeEducation (index) {
+            this.all_therapist_data.education_info.splice(index, 1);
+		},
+		removeExperience (index) {
+			this.all_therapist_data.work_info.splice(index, 1);
+		},
+		getAllTherapistData(){
+			let token = window.localStorage.getItem('token');
+            TherapistService.therapistAllDataService(token).then((response) => {
+                if(response.status==200){
+                    this.all_therapist_data = response.data.data;
+                }
+                else{
+					alert('fail');
+				}
+
+            }).catch((error) => {
+				
+			});
+		},
+		
+	},
 	mounted() {
         if($('.select').length > 0) {
             $('.select').select2({
