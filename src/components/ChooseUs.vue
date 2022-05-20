@@ -12,7 +12,7 @@
 								<h4>
 									<router-link :to="'/doctor/blog-details/'+singleArticle.title">{{singleArticle.title}}</router-link>
 								</h4>
-								<p class="para-text mt-3">{{singleArticle.short_description}}</p>
+								<p class="para-text mt-3">{{singleArticle.short_description.slice(0, 250).concat('...')}}</p>
 							</div>
 						</div>
 					</div>

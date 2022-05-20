@@ -31,15 +31,22 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-12 col-sm-6 col-md-6">
-										<datepicker class="col-12 col-sm-6 col-md-6" v-model="selectedDate" :format="customFormatter" @closed="checkDay"></datepicker>
+								<div class="col-md-6 col-sm-12">
+									<div class="form-group card-label">
+										<label><h6>Please Select Date</h6></label> 
+										<!-- <input type="text" required="required" class="form-control"> -->
+										<datepicker class="col-12 col-sm-6 col-md-6 form-control my-input-picker" v-model="selectedDate" :format="customFormatter" @closed="checkDay"></datepicker>
+									</div>
 								</div>
+								<!-- <div class="col-12 col-sm-6 col-md-6">
+										<datepicker class="col-12 col-sm-6 col-md-6" v-model="selectedDate" :format="customFormatter" @closed="checkDay"></datepicker>
+								</div> -->
 								<div class="col-12 col-sm-6 col-md-6 text-sm-right">
 									<div class="bookingrange btn btn-sm mb-3">
 										<!-- <i class="far fa-calendar-alt mr-2"></i> -->
 									
-										<h4 class="mb-1">11 November 2019</h4>
-									<p class="text-muted">Monday</p>
+										<h4 class="mb-1">{{selectedDate}}</h4>
+									<!-- <p class="text-muted">Monday</p> -->
 										<!-- <i class="fas fa-chevron-down ml-2"></i> -->
 									</div>
 								</div>
@@ -111,79 +118,81 @@
 											<div class="time-slot">
 												<ul class="clearfix">
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
+														<!-- <router-link class="timing" to="patient/checkout/98"> -->
 															<span>9:00</span> <span>AM</span>
+														<!-- </router-link> -->
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing selected" href="#">
+														<a class="timing" @click="gotoLink" selected>
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
 													<li>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>9:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>10:00</span> <span>AM</span>
 														</a>
-														<a class="timing" href="#">
+														<a class="timing" @click="gotoLink">
 															<span>11:00</span> <span>AM</span>
 														</a>
 													</li>
@@ -201,7 +210,7 @@
 							
 							<!-- Submit Section -->
 							<div class="submit-section proceed-btn text-right">
-										<router-link class="apt-btn" :to="'/patient/checkout/'+this.$route.params.doctor_id+'/'+this.this.$route.params.doctor_name">Book Appointment</router-link>
+										<!-- <router-link class="apt-btn" :to="'/patient/checkout/'+this.$route.params.doctor_id+'/'+this.this.$route.params.doctor_name">Book Appointment</router-link> -->
 
 								<!-- <router-link to="/patient/checkout" class="btn btn-primary submit-btn">Proceed to Pay</router-link> -->
 							</div>
@@ -232,6 +241,9 @@ export default {
 		},
     	customFormatter(date) {
 	  		return moment(date).format('MMMM Do YYYY');
+		},
+		gotoLink(){
+			this.$router.push('/patient/checkout/98/Test Therapist');
 		}
 	},
 	components: {

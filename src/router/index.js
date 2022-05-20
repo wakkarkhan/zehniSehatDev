@@ -23,6 +23,12 @@ import DoctorProfile from '@/components/doctor/Profile'
 import BlogDetails from '@/components/doctor/BlogDetails'
 import Assessment from '@/components/doctor/Assessment'
 import Assessment_PHQ from '@/components/doctor/Assessment_PHQ'
+import Assessment_RAADS from '@/components/doctor/Assessment_RAADS'
+import Assessment_EDINBURGH from '@/components/doctor/Assessment_EDINBURGH'
+import Assessment_WHO5 from '@/components/doctor/Assessment_WHO5'
+import Assessment_ADHD from '@/components/doctor/Assessment_ADHD'
+import Assessment_ACE from '@/components/doctor/Assessment_ACE'
+import Assessment_SUCIDE from '@/components/doctor/Assessment_SUCIDE'
 import BlogList from '@/components/doctor/BlogList'
 import BlogGrid from '@/components/doctor/BlogGrid'
 import MapGrid from '@/components/doctor/MapGrid'
@@ -263,6 +269,42 @@ const router = new Router({
       path: '/doctor/assessment-phq',
       name: 'assessment-phq',
       component: Assessment_PHQ
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-raads',
+      name: 'assessment-raads',
+      component: Assessment_RAADS
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-edinburgh',
+      name: 'assessment-edinburgh',
+      component: Assessment_EDINBURGH
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-who5',
+      name: 'assessment-who5',
+      component: Assessment_WHO5
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-adhd',
+      name: 'assessment-adhd',
+      component: Assessment_ADHD
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-ace',
+      name: 'assessment-ace',
+      component: Assessment_ACE
+    },
+    {
+      // path: '/doctor/assessment/:category',
+      path: '/doctor/assessment-sucide',
+      name: 'assessment-sucide',
+      component: Assessment_SUCIDE
     },
     {
       // path: '/doctor/assessment/:category',

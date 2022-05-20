@@ -24,7 +24,12 @@
 										<div class="pro-content">
 											<h3 class="title">
 												<router-link to="#">{{item.full_name}}</router-link> 
-												<i class="fas fa-check-circle verified"></i>
+												<!-- <i class="fa fa-whatsapp verified"></i> -->
+												<a :href="`https://api.whatsapp.com/send?phone=92${item.phone_number}`" target="_blank">
+
+													<i class="fab fa-whatsapp verified"></i>
+													
+												</a>
 											</h3>
 											<p class="speciality">{{item.therapist_speciality}}</p>
 											<!-- <div class="rating">

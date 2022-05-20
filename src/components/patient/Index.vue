@@ -50,10 +50,11 @@
 																<tr>
 																	<th>Therapist</th>
 																	<th>Applied Date</th>
-																	<th>Booking Date</th>
+																	<!-- <th>Booking Date</th> -->
 																	<!-- <th>Amount</th> -->
 																	<th>Follow Up</th>
 																	<th>Status</th>
+																	<th>Whatsapp</th>
 																	<th></th>
 																</tr>
 															</thead>
@@ -68,7 +69,7 @@
 																		</h2>
 																	</td>
 																	<td>{{item.created_at}}</td>
-																	<td>{{item.checkup_day_time}}</td>
+																	<!-- <td>{{item.checkup_day_time}}</td> -->
 																	<!-- <td>Amount</td> -->
 																	<td>--</td>
 																	<!-- <td>
@@ -80,11 +81,19 @@
                                                                         <span class="badge badge-pill bg-warning-light" v-if="item.status == 'booked'">{{item.status}}</span>
                                                                         <span class="badge badge-pill bg-success-light" v-if="item.status == 'confirmed'">{{item.status}}</span>
                                                                     </td>
+																	<td>
+                                                                       <a :href="`https://api.whatsapp.com/send?phone=92${item.phone_number}`" target="_blank" class="btn btn-sm bg-info-light">
+																			<i class="fab fa-whatsapp verified"></i> Whatsapp
+																		</a>
+                                                                    </td>
 																	<td class="text-right">
 																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+																			<!-- <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
 																				<i class="fas fa-print"></i> Print
-																			</a>
+																			</a> -->
+																			<!-- <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+																				<i class="far fa-eye"></i> View
+																			</a> -->
 																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
 																				<i class="far fa-eye"></i> View
 																			</a>

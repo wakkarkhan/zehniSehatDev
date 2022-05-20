@@ -18,14 +18,14 @@
 										<div class="info-widget">
 											<h4 class="card-title">Booking Information</h4>
 											<div class="row">
-												<div class="col-md-6 col-sm-12">
+												<!-- <div class="col-md-6 col-sm-12">
 													<div class="form-group card-label">
 														<label>Booking</label>
 														<VueCtkDateTimePicker v-model="appointment_data.dateTime" />
 														
 													</div>
-												</div>
-												<div class="col-md-6 col-sm-12">
+												</div> -->
+												<div class="col-md-12 col-sm-12">
 													<div class="form-group card-label">
 														<label>Full Name</label>
 														<input v-model="appointment_data.patient_full_name" class="form-control" type="text" required>
@@ -216,7 +216,7 @@ export default {
 		return{
 			appointment_data:{
 				therapist_id: this.$route.params.doctor_id,
-				dateTime:'',
+				dateTime:'2022-05-13',
 				patient_full_name:'',
 				patient_phone:'',
 				patient_email:'',

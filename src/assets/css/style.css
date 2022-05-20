@@ -98,7 +98,9 @@ Version      : 1.0
 	-moz-osx-font-smoothing: grayscale;
 	font-feature-settings: 'liga';
 }
-
+/* .jumbotron {
+    background-color: #19566D !important;
+} */
 html {
     height: 100%;
 }
@@ -2370,6 +2372,19 @@ html.menu-opened body {
 .our-solutions {
 	background-image: url('../img/our-provide.jpeg');
 	padding: 60px 0 45px;
+}
+.my-input-picker input{
+	border-color: rgb(220, 220, 220) !important;
+    width: 100%;
+	border: 0 none !important;
+}
+.my-input-picker input:hover{
+	border-color: rgb(220, 220, 220) !important;
+    width: 100%;
+	border: 0 none !important;
+}
+.timing {
+	cursor: pointer !important;
 }
 .our-solutions .section-title {
 	color: #fff;

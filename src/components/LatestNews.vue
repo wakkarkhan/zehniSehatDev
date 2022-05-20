@@ -14,7 +14,7 @@
 								  	<h4>
 									  <router-link :to="'/doctor/blog-details/'+singleArticle.article_title">{{singleArticle.article_title}}</router-link>
 									</h4>
-								  <p class="card-text">{{singleArticle.short_des}}</p>
+								  <p class="card-text">{{singleArticle.short_description.slice(0, 250).concat('...')}}</p>
 								  <h6>Posted By: Admin</h6>
 								  <router-link :to="'/doctor/blog-details/'+singleArticle.article_title" class="read-more-text">Readmore</router-link>
 								</div>

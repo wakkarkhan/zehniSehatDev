@@ -65,7 +65,7 @@
                                                         </div>
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
-                                                            <label>Phone</label>
+                                                            <label>Phone/WhatsApp</label>
                                                                 <input type="text" v-model="general_information.phone" class="form-control" placeholder="+921234567890">
                                                             </div>
                                                         </div>

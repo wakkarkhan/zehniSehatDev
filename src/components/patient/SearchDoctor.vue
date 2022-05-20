@@ -141,8 +141,8 @@
 												<ul>
 													<!-- <li><i class="far fa-thumbs-up"></i> {{item.likes}}</li>
 													<li><i class="far fa-comment"></i> {{item.feedback}} Feedback</li> -->
-													<li><i class="fas fa-map-marker-alt"></i> {{item.postal_adress}}</li>
-													<li><i class="far fa-money-bill-alt"></i> {{item.therapist_fee}} <i class="fas fa-info-circle" data-toggle="tooltip" title="You have to pay this fee"></i> </li>
+													<!-- <li><i class="fas fa-map-marker-alt"></i> {{item.postal_adress}}</li> -->
+													<li><i class="far fa-money-bill-alt"></i> Rs-/ {{item.therapist_fee}}</li>
 												</ul>
 											</div>
 											<div class="clinic-booking">

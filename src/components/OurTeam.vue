@@ -2,8 +2,8 @@
     <!-- Our Team -->
 			<section class="our-team ">
 				<div class="container">
-					<h3 class="top-title">{{ this.singleLatestCategoryData.title}}</h3>
-					<h2 class="section-title">{{ this.singleLatestCategoryData.title}}</h2>
+					<!-- <h3 class="top-title">{{ this.singleLatestCategoryData.title}}</h3> -->
+					<h2 class="section-title">DISORDERS</h2>
 						
 					<!--  -->
 					<div class="row-sm mrg-10">
