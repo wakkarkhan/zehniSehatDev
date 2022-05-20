@@ -245,7 +245,7 @@
         <layout-footer></layout-footer>
      </div>
 	 	<!-- Edit Time Slot Modal -->
-		<div class="modal fade custom-modal" id="edit_time_slot">
+		<!-- <div class="modal fade custom-modal" id="edit_time_slot">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -298,7 +298,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- /Edit Time Slot Modal -->
 
 		<!-- Add Time Slot Modal -->
